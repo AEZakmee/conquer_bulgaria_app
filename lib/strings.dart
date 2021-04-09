@@ -17,3 +17,6 @@ const String sMatchPassError = "Passwords don't match";
 const String sNameNullError = "Please Enter your name";
 const String sPhoneNumberNullError = "Please Enter your phone number";
 const String sAddressNullError = "Please Enter your address";
+const String sSearchPlace = 'Search a destination';
+const String sPlacesMainScreen = 'Check out those places';
+const String sSeeAll = 'See All';

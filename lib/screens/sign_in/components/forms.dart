@@ -15,12 +15,16 @@ Widget customFormField({
     cursorColor: kPrimaryColor,
     obscureText: label == 'Password' ? true : false,
     decoration: InputDecoration(
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      enabledBorder: kOutlineInputBorder,
+      focusedBorder: kOutlineInputBorder,
+      border: kOutlineInputBorder,
       fillColor: kPrimaryColor,
+      labelStyle: TextStyle(color: kPrimaryColor),
+      suffixStyle: TextStyle(color: kPrimaryColor),
       contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 45),
       labelText: label,
-      labelStyle: TextStyle(color: kPrimaryColor),
       hintText: hint,
-      suffixStyle: TextStyle(color: kPrimaryColor),
       suffixIcon: Padding(
         padding: EdgeInsets.only(
           right: getProportionateScreenWidth(20),
