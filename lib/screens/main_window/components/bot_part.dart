@@ -5,12 +5,11 @@ import '../../../size_config.dart';
 import '../../../strings.dart';
 
 class TitleSeeAll extends StatelessWidget {
-  const TitleSeeAll({
-    Key key,
-    this.text,
-    this.onClick,
-  }) : super(key: key);
+  const TitleSeeAll(
+      {Key key, @required this.text, this.onClick, this.hasSeeAllButton = true})
+      : super(key: key);
   final String text;
+  final bool hasSeeAllButton;
   final Function onClick;
 
   @override
@@ -31,9 +30,9 @@ class TitleSeeAll extends StatelessWidget {
           ),
           Spacer(),
           GestureDetector(
-            onTap: onClick,
+            onTap: hasSeeAllButton ? onClick : () {},
             child: Text(
-              sSeeAll,
+              (hasSeeAllButton) ? sSeeAll : '',
             ),
           ),
         ],

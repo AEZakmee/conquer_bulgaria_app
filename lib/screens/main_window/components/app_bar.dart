@@ -24,12 +24,12 @@ AppBar buildAppBar(BuildContext context) {
       },
     ),
     actions: [
-      userIcon(context),
+      userIcon(context, Provider.of<Data>(context).currentUser.image),
     ],
   );
 }
 
-Padding userIcon(context) {
+Padding userIcon(context, String imageUrl) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
     child: GestureDetector(
@@ -42,7 +42,9 @@ Padding userIcon(context) {
           shape: BoxShape.circle,
           image: DecorationImage(
             fit: BoxFit.fill,
-            image: NetworkImage(Provider.of<Data>(context).currentUser.image),
+            image: (imageUrl == 'none')
+                ? AssetImage('assets/images/default_user_image.png')
+                : NetworkImage(imageUrl),
           ),
         ),
       ),

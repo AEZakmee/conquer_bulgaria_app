@@ -1,5 +1,6 @@
 import 'package:conquer_bulgaria_app/constants.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/screens/others/nav_bar.dart';
 import 'package:conquer_bulgaria_app/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,10 @@ class MainWindow extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: buildAppBar(context),
       body: Body(),
+      bottomNavigationBar: BottomAppBar(
+        elevation: 10,
+        child: NavBar(),
+      ),
     );
   }
 }

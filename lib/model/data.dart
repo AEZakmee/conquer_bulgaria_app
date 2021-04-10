@@ -4,10 +4,13 @@ class Data extends ChangeNotifier {
   static String snimka =
       'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
   List<User> demoUsers = [
-    User(name: 'gosho', image: snimka),
-    User(name: 'pesho', image: snimka),
+    User(name: 'goshoenaiqkiq', image: snimka),
+    User(name: 'pesho', image: 'none'),
     User(name: 'ivan', image: snimka),
-    User(name: 'krasi', image: snimka),
+    User(name: 'krasi', image: 'none'),
+    User(name: 'mitko', image: snimka),
+    User(name: 'kostadin', image: 'none'),
+    User(name: 'goergi', image: snimka),
   ];
   void changeCurrentUser(User user) {
     currentUser = user;
@@ -15,11 +18,9 @@ class Data extends ChangeNotifier {
   }
 
   int get placesLength => demoPlaces.length;
+  int get topUsersLength => demoUsers.length;
 
-  User currentUser = User(
-      name: 'petkan',
-      image:
-          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  User currentUser = User(name: 'petkan', image: 'none');
   List<TravelLocation> demoPlaces = [
     TravelLocation(
         name: 'Къща музей „Никола Вапцаров“',

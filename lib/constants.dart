@@ -3,7 +3,7 @@ import 'size_config.dart';
 
 //TODO: BETTER COLORS
 const kPrimaryColor = Colors.red;
-const kAccentColor = Colors.redAccent;
+const kAccentColor = Colors.white;
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
 const kBoxColor = Color(0xFF3E4067);

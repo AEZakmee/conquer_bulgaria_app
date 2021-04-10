@@ -1,11 +1,15 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conquer_bulgaria_app/constants.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/screens/main_window/components/top_users.dart';
 import 'package:conquer_bulgaria_app/size_config.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'bot_part.dart';
+import 'places_cards.dart';
 import 'search_field.dart';
 
 class Body extends StatelessWidget {
@@ -19,7 +23,7 @@ class Body extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Image.asset(
-                'assets/images/main_window_background2.jpg',
+                'assets/images/main_window_background${Random().nextInt(9)}.jpg',
               ),
               SearchField(),
             ],
@@ -47,91 +51,30 @@ class Body extends StatelessWidget {
                       left: getProportionateScreenWidth(12),
                     ),
                     child: PlacesCard(
-                        travelLocation:
-                            Provider.of<Data>(context).demoPlaces[index],
-                        onClick: () {}),
+                      travelLocation:
+                          Provider.of<Data>(context).demoPlaces[index],
+                      onClick: () {},
+                    ),
                   ),
                 ),
               ],
             ),
           ),
+          SizedBox(
+            height: getProportionateScreenHeight(20),
+          ),
+          TitleSeeAll(
+            text: sTopUsers,
+            hasSeeAllButton: false,
+          ),
+          SizedBox(
+            height: getProportionateScreenHeight(10),
+          ),
+          UsersRow(),
+          SizedBox(
+            height: getProportionateScreenHeight(30),
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class PlacesCard extends StatelessWidget {
-  const PlacesCard({
-    Key key,
-    @required this.travelLocation,
-    @required this.onClick,
-  }) : super(key: key);
-  final TravelLocation travelLocation;
-  final Function onClick;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onClick,
-      child: SizedBox(
-        width: getProportionateScreenWidth(100),
-        child: Column(
-          children: [
-            AspectRatio(
-              aspectRatio: 1.39,
-              child: CachedNetworkImage(
-                imageUrl: travelLocation.image,
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [kBoxShadow],
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                placeholder: (context, url) => LinearProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  backgroundColor: Colors.black45,
-                ),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
-            ),
-            Container(
-              width: getProportionateScreenWidth(100),
-              padding: EdgeInsets.all(
-                getProportionateScreenWidth(15),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [kBoxShadow],
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    travelLocation.name,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: getProportionateScreenWidth(12),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: getProportionateScreenHeight(5),
-            )
-          ],
-        ),
       ),
     );
   }
