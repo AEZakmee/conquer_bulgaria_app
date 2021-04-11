@@ -1,9 +1,8 @@
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conquer_bulgaria_app/constants.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/screens/main_window/components/top_users.dart';
+import 'package:conquer_bulgaria_app/screens/places_window/places_window_screen.dart';
 import 'package:conquer_bulgaria_app/size_config.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,7 @@ class Body extends StatelessWidget {
           TitleSeeAll(
             text: sPlacesMainScreen,
             onClick: () {
-              print('see all');
+              Navigator.pushNamed(context, PlacesWindow.routeName);
             },
           ),
           SizedBox(

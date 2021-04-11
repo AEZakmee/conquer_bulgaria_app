@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'components/app_bar.dart';
+import 'components/body.dart';
+
 class PlacesWindow extends StatelessWidget {
   static String routeName = '/places_window';
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: buildAppBar(context),
+      body: Body(),
+    );
   }
 }

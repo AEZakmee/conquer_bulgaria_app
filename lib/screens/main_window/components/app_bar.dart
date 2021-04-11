@@ -34,10 +34,10 @@ Padding userIcon(context, String imageUrl) {
     padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
     child: GestureDetector(
       onTap: () {
-        print('cl');
+        print(Provider.of<Data>(context, listen: false).currentUser.data());
       },
       child: Container(
-        width: getProportionateScreenWidth(60),
+        width: getProportionateScreenWidth(50),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(

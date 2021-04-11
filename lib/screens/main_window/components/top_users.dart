@@ -77,8 +77,8 @@ class TopUser extends StatelessWidget {
             ),
           ),
           Container(
-            width: getProportionateScreenWidth(60),
-            height: getProportionateScreenHeight(60),
+            width: getProportionateScreenWidth(45),
+            height: getProportionateScreenHeight(55),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
