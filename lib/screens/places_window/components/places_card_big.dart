@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:conquer_bulgaria_app/model/cached_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/screens/place_info_window/place_info_screen.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
@@ -45,7 +46,13 @@ class BigPlacesCard extends StatelessWidget {
                   height: getProportionateScreenHeight(160),
                   child: AspectRatio(
                     aspectRatio: 1.39,
-                    child: cachedImage(),
+                    child: CustomCachedImage(
+                      travelLocation: travelLocation,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -110,30 +117,6 @@ class BigPlacesCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  CachedNetworkImage cachedImage() {
-    return CachedNetworkImage(
-      imageUrl: travelLocation.image,
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          //boxShadow: [kBoxShadow],
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      placeholder: (context, url) => LinearProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        backgroundColor: Colors.black45,
-      ),
-      errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }
 }

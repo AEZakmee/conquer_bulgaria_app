@@ -38,30 +38,32 @@ class Data extends ChangeNotifier {
         id: 1,
         town: 'гр. Банско',
         name: 'Къща музей „Никола Вапцаров“',
+        imageHash: 'L6DcHu00_M%d=-%4tJNZDkyB%yn-',
         image:
             'https://upload.wikimedia.org/wikipedia/commons/4/44/%D0%9A%D1%8A%D1%89%D0%B0%D1%82%D0%B0_%D0%BD%D0%B0_%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0_%D0%92%D0%B0%D0%BF%D1%86%D0%B0%D1%80%D0%BE%D0%B2.jpg'),
-    TravelLocation(
-        id: 2,
-        town: 'гр. Банско',
-        name: 'Къща музей „Неофит Рилски“',
-        image:
-            'https://upload.wikimedia.org/wikipedia/commons/2/27/Museum_House_of_Neofit_Rilski.jpg'),
-    TravelLocation(
-        range: 165.7,
-        id: 3,
-        town: 'гр. Банско',
-        name: 'Велянова къща',
-        image:
-            'https://upload.wikimedia.org/wikipedia/commons/0/06/%D0%92%D0%B5%D0%BB%D1%8F%D0%BD%D0%BE%D0%B2%D0%B0%D1%82%D0%B0_%D0%BA%D1%8A%D1%89%D0%B0_%D0%91%D0%B0%D0%BD%D1%81%D0%BA%D0%BE.JPG'),
-    TravelLocation(
-        id: 4,
-        town: 'гр. Банско',
-        name: 'Банска художествена школа',
-        range: 150.4,
-        image:
-            'https://upload.wikimedia.org/wikipedia/commons/0/08/Bansko_Icon_Gallery_Icons.jpg'),
+    // TravelLocation(
+    //     id: 2,
+    //     town: 'гр. Банско',
+    //     name: 'Къща музей „Неофит Рилски“',
+    //     image:
+    //         'https://upload.wikimedia.org/wikipedia/commons/2/27/Museum_House_of_Neofit_Rilski.jpg'),
+    // TravelLocation(
+    //     range: 165.7,
+    //     id: 3,
+    //     town: 'гр. Банско',
+    //     name: 'Велянова къща',
+    //     image:
+    //         'https://upload.wikimedia.org/wikipedia/commons/0/06/%D0%92%D0%B5%D0%BB%D1%8F%D0%BD%D0%BE%D0%B2%D0%B0%D1%82%D0%B0_%D0%BA%D1%8A%D1%89%D0%B0_%D0%91%D0%B0%D0%BD%D1%81%D0%BA%D0%BE.JPG'),
+    // TravelLocation(
+    //     id: 4,
+    //     town: 'гр. Банско',
+    //     name: 'Банска художествена школа',
+    //     range: 150.4,
+    //     image:
+    //         'https://upload.wikimedia.org/wikipedia/commons/0/08/Bansko_Icon_Gallery_Icons.jpg'),
     TravelLocation(
       id: 5,
+      imageHash: 'L6B|c,00Dw-600~ntAavbx%4tIIq',
       image:
           'https://bulgariatravel.org/wp-content/uploads/2016/076_003_Chudnite_mostove.jpg_7362.jpg',
       town: 'гр. Смолян',
@@ -86,11 +88,18 @@ class User {
 class TravelLocation {
   int id;
   String name;
+  String imageHash;
   String image;
   String town;
   String info;
   double range;
 
   TravelLocation(
-      {this.name, this.image, this.town, this.id, this.range, this.info});
+      {this.name,
+      this.image,
+      this.town,
+      this.id,
+      this.range,
+      this.info,
+      this.imageHash});
 }

@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:conquer_bulgaria_app/model/cached_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/screens/place_info_window/place_info_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
@@ -30,7 +32,14 @@ class PlacesCard extends StatelessWidget {
               tag: travelLocation.id,
               child: AspectRatio(
                 aspectRatio: 1.39,
-                child: cachedImage(),
+                child: CustomCachedImage(
+                  travelLocation: travelLocation,
+                  hasShadow: true,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
               ),
             ),
             Container(
@@ -65,30 +74,6 @@ class PlacesCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  CachedNetworkImage cachedImage() {
-    return CachedNetworkImage(
-      imageUrl: travelLocation.image,
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          boxShadow: [kBoxShadow],
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      placeholder: (context, url) => LinearProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        backgroundColor: Colors.black45,
-      ),
-      errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }
 }

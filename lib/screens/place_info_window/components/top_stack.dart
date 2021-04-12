@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:conquer_bulgaria_app/model/cached_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,12 @@ class TopStack extends StatelessWidget {
           Container(
             child: SizedBox(
               height: getProportionateScreenHeight(340),
-              child: buildCachedNetworkImage(context),
+              child: CustomCachedImage(
+                travelLocation: Provider.of<Data>(context).chosenLocation,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(getProportionateScreenWidth(80)),
+                ),
+              ),
             ),
           ),
           Positioned(
@@ -46,29 +52,6 @@ class TopStack extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-
-  CachedNetworkImage buildCachedNetworkImage(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: Provider.of<Data>(context).chosenLocation.image,
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          //boxShadow: [kBoxShadow],
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(getProportionateScreenWidth(80)),
-          ),
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      placeholder: (context, url) => LinearProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        backgroundColor: Colors.black45,
-      ),
-      errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }
 }
