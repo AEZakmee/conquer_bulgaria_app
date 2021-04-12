@@ -24,6 +24,6 @@ const String sSeeAll = 'See All';
 const String sPlaces = 'Places';
 const String sPlacesLong = 'Places';
 const String sChat = 'Chat';
-const String sUsers = 'Users';
+const String sMap = 'Map';
 const String sVisitedPlace = "Visited";
 const String sNotVisitedPlace = "Not visited";

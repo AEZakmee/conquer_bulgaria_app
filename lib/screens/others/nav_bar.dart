@@ -36,8 +36,8 @@ class NavBar extends StatelessWidget {
                 press: () {},
               ),
               NavItem(
-                icon: Icons.people,
-                title: sUsers,
+                icon: Icons.map,
+                title: sMap,
                 press: () {},
               ),
             ],

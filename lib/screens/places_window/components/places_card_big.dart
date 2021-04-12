@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/screens/place_info_window/place_info_screen.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +13,19 @@ class BigPlacesCard extends StatelessWidget {
   const BigPlacesCard({
     Key key,
     @required this.travelLocation,
-    @required this.onClick,
   }) : super(key: key);
   final TravelLocation travelLocation;
-  final Function onClick;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: GestureDetector(
-        onTap: onClick,
+        onTap: () {
+          Provider.of<Data>(context, listen: false)
+              .setChosenLocation(travelLocation);
+          Navigator.pushNamed(context, PlacesInfoWindow.routeName);
+        },
         child: Container(
           width: getProportionateScreenWidth(160),
           decoration: BoxDecoration(
@@ -36,11 +39,14 @@ class BigPlacesCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: getProportionateScreenHeight(160),
-                child: AspectRatio(
-                  aspectRatio: 1.39,
-                  child: cachedImage(),
+              Hero(
+                tag: travelLocation.id,
+                child: SizedBox(
+                  height: getProportionateScreenHeight(160),
+                  child: AspectRatio(
+                    aspectRatio: 1.39,
+                    child: cachedImage(),
+                  ),
                 ),
               ),
               Padding(
@@ -91,7 +97,17 @@ class BigPlacesCard extends StatelessWidget {
               : Icon(
                   Icons.close,
                   color: Colors.red,
-                )
+                ),
+          Spacer(),
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Text(
+              (travelLocation.range != null)
+                  ? travelLocation.range.toStringAsFixed(1) + 'км'
+                  : '',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
         ],
       ),
     );

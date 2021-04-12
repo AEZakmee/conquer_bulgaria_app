@@ -37,7 +37,7 @@ Padding userIcon(context, String imageUrl) {
         print(Provider.of<Data>(context, listen: false).currentUser.data());
       },
       child: Container(
-        width: getProportionateScreenWidth(50),
+        width: 50,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(

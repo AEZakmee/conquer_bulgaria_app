@@ -20,12 +20,6 @@ class Body extends StatelessWidget {
             Provider.of<Data>(context).placesLength,
             (index) => BigPlacesCard(
               travelLocation: Provider.of<Data>(context).demoPlaces[index],
-              onClick: () {
-                Provider.of<Data>(context, listen: false).userVisitedPlace(
-                    Provider.of<Data>(context, listen: false)
-                        .demoPlaces[index]
-                        .id);
-              },
             ),
           ),
         ],

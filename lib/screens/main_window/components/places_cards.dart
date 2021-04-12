@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/screens/place_info_window/place_info_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -9,25 +11,30 @@ class PlacesCard extends StatelessWidget {
   const PlacesCard({
     Key key,
     @required this.travelLocation,
-    @required this.onClick,
   }) : super(key: key);
   final TravelLocation travelLocation;
-  final Function onClick;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onClick,
+      onTap: () {
+        Provider.of<Data>(context, listen: false)
+            .setChosenLocation(travelLocation);
+        Navigator.pushNamed(context, PlacesInfoWindow.routeName);
+      },
       child: SizedBox(
-        width: getProportionateScreenWidth(100),
+        width: getProportionateScreenHeight(120),
         child: Column(
           children: [
-            AspectRatio(
-              aspectRatio: 1.39,
-              child: cachedImage(),
+            Hero(
+              tag: travelLocation.id,
+              child: AspectRatio(
+                aspectRatio: 1.39,
+                child: cachedImage(),
+              ),
             ),
             Container(
-              width: getProportionateScreenWidth(100),
+              width: getProportionateScreenHeight(120),
               padding: EdgeInsets.all(
                 getProportionateScreenWidth(10),
               ),
@@ -46,7 +53,7 @@ class PlacesCard extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: getProportionateScreenWidth(
-                          8 + (6 / travelLocation.name.length) * 8),
+                          10 + (6 / travelLocation.name.length) * 8),
                     ),
                   ),
                 ],

@@ -25,7 +25,7 @@ class TitleSeeAll extends StatelessWidget {
             style: TextStyle(
               color: kBoldTextColor,
               fontWeight: FontWeight.w500,
-              fontSize: getProportionateScreenWidth(14),
+              fontSize: getProportionateScreenHeight(18),
             ),
           ),
           Spacer(),
@@ -33,6 +33,9 @@ class TitleSeeAll extends StatelessWidget {
             onTap: hasSeeAllButton ? onClick : () {},
             child: Text(
               (hasSeeAllButton) ? sSeeAll : '',
+              style: TextStyle(
+                fontSize: getProportionateScreenHeight(18),
+              ),
             ),
           ),
         ],

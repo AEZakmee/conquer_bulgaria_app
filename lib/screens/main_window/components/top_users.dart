@@ -71,14 +71,15 @@ class TopUser extends StatelessWidget {
               '${name[0].toUpperCase()}${name.substring(1)}',
               textAlign: TextAlign.center,
               style: TextStyle(
+                fontSize: getProportionateScreenWidth(13),
                 color: kBoxColor,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
           Container(
-            width: getProportionateScreenWidth(45),
-            height: getProportionateScreenHeight(55),
+            width: 55,
+            height: 55,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(

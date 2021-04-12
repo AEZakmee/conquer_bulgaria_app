@@ -11,7 +11,19 @@ import 'bot_part.dart';
 import 'places_cards.dart';
 import 'search_field.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  String _picture;
+  @override
+  void initState() {
+    super.initState();
+    _picture = 'assets/images/main_window_background${Random().nextInt(9)}.jpg';
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,7 +34,7 @@ class Body extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Image.asset(
-                'assets/images/main_window_background${Random().nextInt(9)}.jpg',
+                _picture,
               ),
               SearchField(),
             ],
@@ -52,7 +64,6 @@ class Body extends StatelessWidget {
                     child: PlacesCard(
                       travelLocation:
                           Provider.of<Data>(context).demoPlaces[index],
-                      onClick: () {},
                     ),
                   ),
                 ),

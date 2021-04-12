@@ -14,6 +14,7 @@ class SearchField extends StatelessWidget {
     return Positioned(
       bottom: getProportionateScreenHeight(-30),
       child: Container(
+        alignment: Alignment.center,
         width: getProportionateScreenWidth(300),
         height: getProportionateScreenHeight(60),
         decoration: BoxDecoration(
@@ -32,12 +33,21 @@ class SearchField extends StatelessWidget {
         child: TextField(
           onChanged: (v) {},
           cursorColor: kPrimaryColor,
+          textAlign: TextAlign.left,
+          textAlignVertical: TextAlignVertical.center,
+          style: TextStyle(
+            color: kBoxColor,
+            fontSize: getProportionateScreenHeight(20),
+          ),
           decoration: InputDecoration(
             enabledBorder: kSearchOutlineInputBorder,
             focusedBorder: kSearchOutlineInputBorder,
             border: kSearchOutlineInputBorder,
             hintText: sSearchPlace,
-            hintStyle: TextStyle(color: kBoxColor),
+            hintStyle: TextStyle(
+              color: kBoxColor,
+              fontSize: getProportionateScreenHeight(20),
+            ),
             suffixIcon: GestureDetector(
               onTap: () {
                 print('searched');
@@ -45,11 +55,12 @@ class SearchField extends StatelessWidget {
               child: Icon(
                 Icons.search,
                 color: kPrimaryColor,
+                size: getProportionateScreenHeight(35),
               ),
             ),
             contentPadding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenWidth(20),
-              vertical: getProportionateScreenHeight(15),
+              horizontal: getProportionateScreenWidth(25),
+              //vertical: getProportionateScreenHeight(15),
             ),
           ),
         ),
