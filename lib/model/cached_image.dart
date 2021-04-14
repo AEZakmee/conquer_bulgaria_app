@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 
 import '../constants.dart';
-import 'data.dart';
+import 'travel_location.dart';
 
 class CustomCachedImage extends StatelessWidget {
   const CustomCachedImage({

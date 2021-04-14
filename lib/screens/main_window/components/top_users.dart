@@ -31,11 +31,11 @@ class UsersRow extends StatelessWidget {
         child: Row(
           children: [
             ...List.generate(
-              Provider.of<Data>(context).topUsersLength,
+              Provider.of<Data>(context).topUsers.length,
               (index) => TopUser(
-                imageUrl: Provider.of<Data>(context).demoUsers[index].image,
-                name: Provider.of<Data>(context).demoUsers[index].name,
-                points: 12,
+                imageUrl: Provider.of<Data>(context).topUsers[index].picture,
+                name: Provider.of<Data>(context).topUsers[index].username,
+                points: Provider.of<Data>(context).topUsers[index].totalPlaces,
               ),
             )
           ],

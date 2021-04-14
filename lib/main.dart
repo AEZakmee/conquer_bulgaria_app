@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: sName,
         theme: theme(),
-        initialRoute: MainWindow.routeName,
-        //SplashScreen.routeName,
+        initialRoute: //MainWindow.routeName,
+            SplashScreen.routeName,
         routes: routes,
       ),
     );

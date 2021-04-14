@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conquer_bulgaria_app/model/cached_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:conquer_bulgaria_app/screens/place_info_window/place_info_screen.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
 import 'package:flutter/cupertino.dart';

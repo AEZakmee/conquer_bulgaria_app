@@ -20,7 +20,7 @@ AppBar buildAppBar(BuildContext context) {
     ),
     elevation: 10,
     actions: [
-      userIcon(context, Provider.of<Data>(context).currentUser.image),
+      userIcon(context, Provider.of<Data>(context).currentUser.picture),
     ],
   );
 }

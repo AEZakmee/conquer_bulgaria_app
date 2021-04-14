@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/screens/main_window/components/top_users.dart';
 import 'package:conquer_bulgaria_app/screens/places_window/places_window_screen.dart';
@@ -56,14 +55,13 @@ class _BodyState extends State<Body> {
             child: Row(
               children: [
                 ...List.generate(
-                  Provider.of<Data>(context).placesLength,
+                  Provider.of<Data>(context).places.length != 0 ? 4 : 0,
                   (index) => Padding(
                     padding: EdgeInsets.only(
                       left: getProportionateScreenWidth(12),
                     ),
                     child: PlacesCard(
-                      travelLocation:
-                          Provider.of<Data>(context).demoPlaces[index],
+                      travelLocation: Provider.of<Data>(context).places[index],
                     ),
                   ),
                 ),

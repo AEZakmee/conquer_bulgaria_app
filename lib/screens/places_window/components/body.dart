@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
           ...List.generate(
             Provider.of<Data>(context).placesLength,
             (index) => BigPlacesCard(
-              travelLocation: Provider.of<Data>(context).demoPlaces[index],
+              travelLocation: Provider.of<Data>(context).places[index],
             ),
           ),
         ],

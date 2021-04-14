@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,16 +17,18 @@ AppBar buildAppBar(BuildContext context) {
       ),
       onPressed: () {
         //Todo menu functionality
-        Provider.of<Data>(context, listen: false).changeCurrentUser(
-          User(
-              name: 'gosho',
-              image:
-                  'https://img.freepik.com/free-photo/handsome-young-businessman-shirt-eyeglasses_85574-6228.jpg?size=626&ext=jpg'),
-        );
+        // print('uploading data');
+        // PlacesData().placesForUpload.forEach((element) {
+        //   Firestore.instance
+        //       .collection('places')
+        //       .document(element.id.toString())
+        //       .setData(element.toMap());
+        // });
       },
     ),
     actions: [
-      userIcon(context, Provider.of<Data>(context).currentUser.image),
+      userIcon(
+          context, Provider.of<Data>(context).currentUser.picture ?? 'none'),
     ],
   );
 }
