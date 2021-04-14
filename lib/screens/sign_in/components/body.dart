@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
 import 'package:conquer_bulgaria_app/screens/main_window/main_window_screen.dart';
 import 'package:conquer_bulgaria_app/screens/splash/components/buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -96,7 +97,7 @@ class _SignInFormState extends State<SignInForm> {
                 final newUser = await _auth.signInWithEmailAndPassword(
                     email: _email, password: _pass);
                 if (newUser != null) {
-                  Navigator.popAndPushNamed(context, MainWindow.routeName);
+                  Navigator.popAndPushNamed(context, LoadingScreen.routeName);
                   _btnController.success();
                 }
               } catch (e) {

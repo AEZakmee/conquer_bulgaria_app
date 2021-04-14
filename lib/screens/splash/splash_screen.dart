@@ -16,14 +16,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    FirebaseAuth.instance.onAuthStateChanged.listen((FirebaseUser user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        print('User' + user.email + 'is signed in');
-        Navigator.pushNamed(context, MainWindow.routeName);
-      }
-    });
   }
 
   @override

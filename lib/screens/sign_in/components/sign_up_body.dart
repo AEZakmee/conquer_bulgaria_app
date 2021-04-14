@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
 import 'package:conquer_bulgaria_app/screens/main_window/main_window_screen.dart';
 import 'package:conquer_bulgaria_app/screens/splash/components/buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -122,11 +123,13 @@ class _SignUpFormState extends State<SignUpForm> {
                   if (newUser != null) {
                     _firestore.collection('users').document(_email).setData({
                       'username': _username,
+                      'picture': 'none',
                       'totalPlaces': 0,
                       'places': [-1]
                     }).whenComplete(() {
                       _btnController.success();
-                      Navigator.pushNamed(context, MainWindow.routeName);
+                      Navigator.popAndPushNamed(
+                          context, LoadingScreen.routeName);
                     });
                   }
                 } catch (e) {

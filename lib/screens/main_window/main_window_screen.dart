@@ -3,6 +3,7 @@ import 'package:conquer_bulgaria_app/constants.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:conquer_bulgaria_app/model/user_profile.dart';
+import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
 import 'package:conquer_bulgaria_app/screens/others/nav_bar.dart';
 import 'package:conquer_bulgaria_app/screens/splash/splash_screen.dart';
 import 'package:conquer_bulgaria_app/size_config.dart';
@@ -21,71 +22,59 @@ class MainWindow extends StatefulWidget {
 }
 
 class _MainWindowState extends State<MainWindow> {
-  final _db = Firestore.instance;
-  final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedUser;
-  //todo : move it to firestoreService
-  void initFirebaseListeners() async {
-    try {
-      final user = await _auth.currentUser();
-      if (user != null) {
-        loggedUser = user;
-        _db
-            .collection('users')
-            .document(loggedUser.email)
-            .snapshots()
-            .listen((snapshot) {
-          print('listening for current User');
-          User loggedUserData = User.fromJson(snapshot.data);
-          Provider.of<Data>(context, listen: false)
-              .changeCurrentUser(loggedUserData);
-        });
-        _db
-            .collection('users')
-            .orderBy('totalPlaces')
-            .limit(10)
-            .snapshots()
-            .listen((querySnapshot) {
-          print('listening for top users');
-          Provider.of<Data>(context, listen: false).changeTopUsers(querySnapshot
-              .documents
-              .map((element) => User.fromJson(element.data))
-              .toList());
-        });
-
-        _db.collection('places').snapshots().listen((querySnapshot) {
-          print('listening for places');
-          Provider.of<Data>(context, listen: false).loadPlaces(querySnapshot
-              .documents
-              .map((element) => TravelLocation.fromJson(element.data))
-              .toList());
-        });
-        //print(loggedUser.email);
-      } else {
-        _auth.signOut();
-        Navigator.pushNamed(context, SplashScreen.routeName);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
+  var _auth = FirebaseAuth.instance;
   @override
   void initState() {
-    initFirebaseListeners();
+    // TODO: implement initState
     super.initState();
+    _auth.onAuthStateChanged.listen((FirebaseUser user) {
+      if (user == null) {
+        print('User is currently signed out!');
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            SplashScreen.routeName, (Route<dynamic> route) => false);
+      } else {
+        print('User' + user.email + 'is signed in');
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: buildAppBar(context),
-      body: Body(),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 10,
-        child: NavBar(),
+    return WillPopScope(
+      onWillPop: () {
+        return showDialog(
+              context: context,
+              builder: (context) => new AlertDialog(
+                title: new Text(
+                    'Сигурни ли сте че желаете да излезете от текущата сесия?'),
+                content: new Text(
+                    'Ще се наложи да се валидирате отново следващият път, препоръчително е просто да затворите приложението.'),
+                actions: <Widget>[
+                  new GestureDetector(
+                    onTap: () => Navigator.of(context).pop(false),
+                    child: Text("Не, нека остана логнат"),
+                  ),
+                  SizedBox(height: 16),
+                  new GestureDetector(
+                    onTap: () {
+                      _auth.signOut();
+                    },
+                    child: Text("Да, отпиши ме"),
+                  ),
+                ],
+              ),
+            ) ??
+            false;
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: buildAppBar(context),
+        body: Body(),
+        bottomNavigationBar: BottomAppBar(
+          elevation: 10,
+          child: NavBar(),
+        ),
       ),
     );
   }

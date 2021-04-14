@@ -1,3 +1,5 @@
+import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
+
 import 'screens/main_window/main_window_screen.dart';
 import 'screens/place_info_window/place_info_screen.dart';
 import 'screens/places_window/places_window_screen.dart';
@@ -13,4 +15,5 @@ final Map<String, WidgetBuilder> routes = {
   MainWindow.routeName: (context) => MainWindow(),
   PlacesWindow.routeName: (context) => PlacesWindow(),
   PlacesInfoWindow.routeName: (context) => PlacesInfoWindow(),
+  LoadingScreen.routeName: (context) => LoadingScreen(),
 };

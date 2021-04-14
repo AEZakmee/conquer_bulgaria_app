@@ -34,19 +34,6 @@ class _BodyState extends State<Body> {
     }
   ];
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    FirebaseAuth.instance.onAuthStateChanged.listen((FirebaseUser user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        Navigator.popAndPushNamed(context, MainWindow.routeName);
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SizedBox(

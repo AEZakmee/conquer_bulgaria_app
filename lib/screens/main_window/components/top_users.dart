@@ -84,7 +84,7 @@ class TopUser extends StatelessWidget {
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: (imageUrl == 'none')
+                image: (imageUrl == 'none' || imageUrl == null)
                     ? AssetImage('assets/images/default_user_image.png')
                     : NetworkImage(imageUrl),
               ),

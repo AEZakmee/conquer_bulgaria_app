@@ -1,4 +1,5 @@
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
 import 'package:conquer_bulgaria_app/screens/main_window/main_window_screen.dart';
 import 'package:conquer_bulgaria_app/size_config.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         title: sName,
         theme: theme(),
         initialRoute: //MainWindow.routeName,
-            SplashScreen.routeName,
+            //SplashScreen.routeName,
+            LoadingScreen.routeName,
         routes: routes,
       ),
     );

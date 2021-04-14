@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ AppBar buildAppBar(BuildContext context) {
         Icons.menu,
       ),
       onPressed: () {
+        FirebaseAuth.instance.signOut();
         //Todo menu functionality
         // print('uploading data');
         // PlacesData().placesForUpload.forEach((element) {
