@@ -23,7 +23,7 @@ ThemeData theme() {
 
 TextTheme textTheme() {
   return TextTheme(
-    bodyText1: TextStyle(color: kTextColor),
+    bodyText1: TextStyle(color: kTextColor, fontWeight: FontWeight.w500),
     bodyText2: TextStyle(color: kTextColor),
   );
 }

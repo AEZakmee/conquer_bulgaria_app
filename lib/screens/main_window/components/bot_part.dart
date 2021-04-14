@@ -24,7 +24,7 @@ class TitleSeeAll extends StatelessWidget {
             text,
             style: TextStyle(
               color: kBoldTextColor,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w800,
               fontSize: getProportionateScreenHeight(18),
             ),
           ),
@@ -34,7 +34,8 @@ class TitleSeeAll extends StatelessWidget {
             child: Text(
               (hasSeeAllButton) ? sSeeAll : '',
               style: TextStyle(
-                fontSize: getProportionateScreenHeight(18),
+                fontWeight: FontWeight.w500,
+                fontSize: getProportionateScreenHeight(16),
               ),
             ),
           ),

@@ -1,4 +1,6 @@
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/model/user_profile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,29 +16,32 @@ class UsersRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(10),
-      ),
-      padding: EdgeInsets.symmetric(
-        vertical: getProportionateScreenWidth(10),
-      ),
+      width: SizeConfig.screenWidth - 20,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
+        color: Colors.blueGrey.shade100,
         boxShadow: [kBoxShadow],
+        borderRadius: BorderRadius.circular(13),
       ),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        child: Column(
           children: [
             ...List.generate(
               Provider.of<Data>(context).topUsers.length,
-              (index) => TopUser(
-                imageUrl: Provider.of<Data>(context).topUsers[index].picture,
-                name: Provider.of<Data>(context).topUsers[index].username,
-                points: Provider.of<Data>(context).topUsers[index].totalPlaces,
-              ),
+              (index) {
+                User user = Provider.of<Data>(context).topUsers[index];
+                return Padding(
+                  padding:
+                      EdgeInsets.only(bottom: getProportionateScreenHeight(8)),
+                  child: TopUser(
+                    index: index,
+                    name: user.username,
+                    points: user.totalPlaces,
+                    isCurrentUser: (user.username ==
+                        Provider.of<Data>(context).currentUser.username),
+                  ),
+                );
+              },
             )
           ],
         ),
@@ -48,54 +53,77 @@ class UsersRow extends StatelessWidget {
 class TopUser extends StatelessWidget {
   const TopUser({
     Key key,
-    @required this.name,
-    @required this.imageUrl,
-    @required this.points,
+    this.points,
+    this.name,
+    this.index,
+    this.isCurrentUser = false,
   }) : super(key: key);
-  final String name;
-  final String imageUrl;
   final int points;
+  final String name;
+  final int index;
+  final bool isCurrentUser;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        right: getProportionateScreenWidth(12),
+    return Container(
+      //padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+      width: SizeConfig.screenWidth - 30,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [kBoxShadow],
+        borderRadius: BorderRadius.circular(15),
       ),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: getProportionateScreenHeight(4),
+      child: SizedBox(
+        height: getProportionateScreenHeight(55),
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  left: getProportionateScreenHeight(15),
+                  right: getProportionateScreenHeight(10)),
+              child: buildText(string: (index + 1).toString(), size: 25),
             ),
-            child: Text(
-              '${name[0].toUpperCase()}${name.substring(1)}',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: getProportionateScreenWidth(13),
-                color: kBoxColor,
-                fontWeight: FontWeight.w600,
-              ),
+            VerticalDivider(
+              color: Colors.blueGrey.shade600,
+              thickness: 2,
             ),
-          ),
-          Container(
-            width: 55,
-            height: 55,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: (imageUrl == 'none' || imageUrl == null)
-                    ? AssetImage('assets/images/default_user_image.png')
-                    : NetworkImage(imageUrl),
-              ),
+            Padding(
+              padding: EdgeInsets.only(left: getProportionateScreenHeight(5)),
+              child: buildText(
+                  string: name,
+                  size: 18,
+                  color: (isCurrentUser) ? Colors.red : Colors.black87),
             ),
-          ),
-          Text(
-            '${points.toString()} Points',
-            textAlign: TextAlign.center,
-          )
-        ],
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.only(right: getProportionateScreenWidth(15)),
+              child: buildText(string: points.toString(), size: 23),
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  Text buildText(
+      {String string, double size = 17, Color color = Colors.black87}) {
+    return Text(
+      string,
+      style: TextStyle(
+          color: color,
+          fontWeight: FontWeight.bold,
+          fontSize: getProportionateScreenWidth(size)),
+    );
+  }
 }
+
+//children: [
+//   ...List.generate(
+//     Provider.of<Data>(context).topUsers.length,
+//     (index) => TopUser(
+//       imageUrl: Provider.of<Data>(context).topUsers[index].picture,
+//       name: Provider.of<Data>(context).topUsers[index].username,
+//       points: Provider.of<Data>(context).topUsers[index].totalPlaces,
+//     ),
+//   )
+// ],

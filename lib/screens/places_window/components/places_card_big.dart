@@ -43,15 +43,12 @@ class BigPlacesCard extends StatelessWidget {
               Hero(
                 tag: travelLocation.id,
                 child: SizedBox(
-                  height: getProportionateScreenHeight(160),
-                  child: AspectRatio(
-                    aspectRatio: 1.39,
-                    child: CustomCachedImage(
-                      travelLocation: travelLocation,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
+                  height: getProportionateScreenHeight(150),
+                  child: CustomCachedImage(
+                    travelLocation: travelLocation,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
                   ),
                 ),
@@ -93,6 +90,9 @@ class BigPlacesCard extends StatelessWidget {
           Text(
             (isVisited) ? sVisitedPlace : sNotVisitedPlace,
             style: TextStyle(
+                fontSize: (isVisited)
+                    ? getProportionateScreenWidth(14)
+                    : getProportionateScreenWidth(11),
                 color: (isVisited) ? Colors.green : Colors.red,
                 fontWeight: FontWeight.w800),
           ),

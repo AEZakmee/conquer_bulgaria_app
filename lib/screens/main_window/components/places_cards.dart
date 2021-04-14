@@ -25,13 +25,13 @@ class PlacesCard extends StatelessWidget {
         Navigator.pushNamed(context, PlacesInfoWindow.routeName);
       },
       child: SizedBox(
-        width: getProportionateScreenHeight(120),
+        width: getProportionateScreenHeight(130),
         child: Column(
           children: [
             Hero(
               tag: travelLocation.id,
               child: AspectRatio(
-                aspectRatio: 1.39,
+                aspectRatio: 16 / 10,
                 child: CustomCachedImage(
                   travelLocation: travelLocation,
                   hasShadow: true,
@@ -43,7 +43,7 @@ class PlacesCard extends StatelessWidget {
               ),
             ),
             Container(
-              width: getProportionateScreenHeight(120),
+              width: getProportionateScreenHeight(130),
               padding: EdgeInsets.all(
                 getProportionateScreenWidth(10),
               ),
@@ -61,8 +61,10 @@ class PlacesCard extends StatelessWidget {
                     travelLocation.name,
                     textAlign: TextAlign.center,
                     style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.blueGrey,
                       fontSize: getProportionateScreenWidth(
-                          10 + (6 / travelLocation.name.length) * 8),
+                          10 + (5 / travelLocation.name.length) * 9),
                     ),
                   ),
                 ],

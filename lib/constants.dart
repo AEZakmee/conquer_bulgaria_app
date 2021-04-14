@@ -5,7 +5,7 @@ import 'size_config.dart';
 const kPrimaryColor = Colors.red;
 const kAccentColor = Colors.white;
 const kSecondaryColor = Color(0xFF979797);
-const kTextColor = Color(0xFF757575);
+const kTextColor = Colors.blueGrey;
 const kBoxColor = Color(0xFF3E4067);
 const kBoldTextColor = Colors.black;
 const kCoolFont = 'aAlwaysSmile';

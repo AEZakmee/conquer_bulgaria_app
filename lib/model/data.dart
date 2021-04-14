@@ -19,7 +19,7 @@ class Data extends ChangeNotifier {
   List<User> _topUsers = [];
   List<User> get topUsers => _topUsers;
   void changeTopUsers(List<User> users) {
-    _topUsers = users;
+    _topUsers = users.reversed.toList();
     notifyListeners();
   }
 

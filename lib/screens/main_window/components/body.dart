@@ -76,7 +76,7 @@ class _BodyState extends State<Body> {
             hasSeeAllButton: false,
           ),
           SizedBox(
-            height: getProportionateScreenHeight(10),
+            height: getProportionateScreenHeight(20),
           ),
           UsersRow(),
           SizedBox(

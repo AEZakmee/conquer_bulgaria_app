@@ -17,7 +17,7 @@ AppBar buildAppBar(BuildContext context) {
         Icons.menu,
       ),
       onPressed: () {
-        FirebaseAuth.instance.signOut();
+        //FirebaseAuth.instance.signOut();
         //Todo menu functionality
         // print('uploading data');
         // PlacesData().placesForUpload.forEach((element) {
@@ -28,32 +28,32 @@ AppBar buildAppBar(BuildContext context) {
         // });
       },
     ),
-    actions: [
-      userIcon(
-          context, Provider.of<Data>(context).currentUser.picture ?? 'none'),
-    ],
+    // actions: [
+    //   userIcon(
+    //       context, Provider.of<Data>(context).currentUser.picture ?? 'none'),
+    // ],
   );
 }
 
-Padding userIcon(context, String imageUrl) {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-    child: GestureDetector(
-      onTap: () {
-        print(Provider.of<Data>(context, listen: false).currentUser.data());
-      },
-      child: Container(
-        width: 50,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: (imageUrl == 'none')
-                ? AssetImage('assets/images/default_user_image.png')
-                : NetworkImage(imageUrl),
-          ),
-        ),
-      ),
-    ),
-  );
-}
+// Padding userIcon(context, String imageUrl) {
+//   return Padding(
+//     padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+//     child: GestureDetector(
+//       onTap: () {
+//         print(Provider.of<Data>(context, listen: false).currentUser.data());
+//       },
+//       child: Container(
+//         width: 50,
+//         decoration: BoxDecoration(
+//           shape: BoxShape.circle,
+//           image: DecorationImage(
+//             fit: BoxFit.fill,
+//             image: (imageUrl == 'none')
+//                 ? AssetImage('assets/images/default_user_image.png')
+//                 : NetworkImage(imageUrl),
+//           ),
+//         ),
+//       ),
+//     ),
+//   );
+// }
