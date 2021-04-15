@@ -17,7 +17,6 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   int currentIndex = 0;
-  final _btnController = new RoundedLoadingButtonController();
   //todo: get better pictures
   List<Map<String, String>> splashData = [
     {
@@ -82,15 +81,13 @@ class _BodyState extends State<Body> {
                   Spacer(),
                   Padding(
                     padding: EdgeInsets.all(getProportionateScreenHeight(30)),
-                    child: DefaultLoadingButton(
-                      controller: _btnController,
+                    child: DefaultButton(
                       color: (currentIndex == splashData.length - 1)
                           ? kPrimaryColor
                           : Colors.grey,
                       onPress: () {
                         if (currentIndex == splashData.length - 1) {
                           Navigator.pushNamed(context, SignUpScreen.routeName);
-                          _btnController.reset();
                         }
                       },
                       text: sContinue,

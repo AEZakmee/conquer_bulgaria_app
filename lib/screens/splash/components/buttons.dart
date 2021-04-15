@@ -22,8 +22,9 @@ class DefaultLoadingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: getProportionateScreenHeight(54),
+      //height: getProportionateScreenHeight(54),
       child: RoundedLoadingButton(
+        height: getProportionateScreenHeight(54),
         controller: controller,
         color: color,
         child: Text(
@@ -34,6 +35,41 @@ class DefaultLoadingButton extends StatelessWidget {
           ),
         ),
         onPressed: onPress,
+      ),
+    );
+  }
+}
+
+class DefaultButton extends StatelessWidget {
+  const DefaultButton({
+    Key key,
+    this.text = sContinue,
+    @required this.onPress,
+    this.color = kPrimaryColor,
+  }) : super(key: key);
+  final String text;
+  final Function onPress;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: getProportionateScreenHeight(54),
+      child: Material(
+        color: color,
+        elevation: color == kPrimaryColor ? 5 : 0,
+        borderRadius: BorderRadius.circular(30),
+        child: MaterialButton(
+          child: Text(
+            text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: getProportionateScreenWidth(20),
+            ),
+          ),
+          onPressed: onPress,
+        ),
       ),
     );
   }

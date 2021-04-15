@@ -121,7 +121,10 @@ class _SignUpFormState extends State<SignUpForm> {
                   );
                   final newUser = await _auth.currentUser();
                   if (newUser != null) {
-                    _firestore.collection('users').document(_email).setData({
+                    _firestore
+                        .collection('users')
+                        .document(_email.toLowerCase())
+                        .setData({
                       'username': _username,
                       'picture': 'none',
                       'totalPlaces': 0,

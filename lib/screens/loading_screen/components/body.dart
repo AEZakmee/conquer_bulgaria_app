@@ -54,7 +54,7 @@ class _BodyState extends State<Body> {
               .map((element) => TravelLocation.fromJson(element.data))
               .toList());
         });
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(Duration(milliseconds: 500));
         Navigator.pushNamed(context, MainWindow.routeName);
         //print(loggedUser.email);
       } else {
@@ -95,7 +95,10 @@ class _BodyState extends State<Body> {
             SizedBox(
               height: getProportionateScreenHeight(20),
             ),
-            Image.asset('assets/images/loading_flag.png'),
+            SizedBox(
+              width: getProportionateScreenWidth(150),
+              child: Image.asset('assets/images/loading_flag.png'),
+            ),
             SizedBox(
               height: getProportionateScreenHeight(20),
             ),
