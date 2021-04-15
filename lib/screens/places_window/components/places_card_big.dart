@@ -109,14 +109,21 @@ class BigPlacesCard extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Text(
-              (travelLocation.range != null)
-                  ? travelLocation.range.toStringAsFixed(1) + 'км'
-                  : '',
+              calculateRangeString(travelLocation.range),
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],
       ),
     );
+  }
+
+  String calculateRangeString(double range) {
+    if (range == null) return '';
+    if (range > 1000) return '>1000км';
+    if (range > 1) return range.toStringAsFixed(1) + 'км';
+    //print(range);
+    if (range > 0) return (range * 100).toStringAsFixed(0) + 'м';
+    return '';
   }
 }

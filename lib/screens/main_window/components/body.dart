@@ -1,10 +1,12 @@
 import 'dart:math';
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/model/user_location.dart';
 import 'package:conquer_bulgaria_app/screens/main_window/components/top_users.dart';
 import 'package:conquer_bulgaria_app/screens/places_window/places_window_screen.dart';
 import 'package:conquer_bulgaria_app/size_config.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'bot_part.dart';
 import 'places_cards.dart';

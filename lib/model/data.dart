@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
+import 'package:conquer_bulgaria_app/model/user_location.dart';
 import 'package:conquer_bulgaria_app/model/user_profile.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:location/location.dart';
 
 class Data extends ChangeNotifier {
   User currentUser = User();
@@ -45,6 +49,26 @@ class Data extends ChangeNotifier {
       _places.forEach((e) => searched.add(e));
     }
     return searched;
+  }
+
+  UserLocation get currentUserLocation => _currentLocation;
+  UserLocation _currentLocation;
+  void setCurrentUserLocation(UserLocation userLocation) {
+    _currentLocation = userLocation;
+    _places.forEach((element) {
+      element.range = calculateDistance(element.latitude, element.longitude,
+          _currentLocation.latitude, _currentLocation.longitude);
+    });
+    notifyListeners();
+  }
+
+  static double calculateDistance(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((lat2 - lat1) * p) / 2 +
+        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+    return 12742 * asin(sqrt(a));
   }
 }
 

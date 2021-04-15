@@ -36,13 +36,8 @@ class LocationInformation extends StatelessWidget {
               right: 8,
             ),
             child: Text(
-              (Provider.of<Data>(context).chosenLocation.range != null)
-                  ? Provider.of<Data>(context)
-                          .chosenLocation
-                          .range
-                          .toStringAsFixed(1) +
-                      'км'
-                  : '',
+              calculateRangeString(
+                  Provider.of<Data>(context).chosenLocation.range),
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(18),
                 fontWeight: FontWeight.w800,
@@ -52,6 +47,15 @@ class LocationInformation extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String calculateRangeString(double range) {
+    if (range == null) return '';
+    if (range > 1000) return '>1000км';
+    if (range > 1) return range.toStringAsFixed(1) + 'км';
+    print(range);
+    if (range > 0) return (range * 100).toStringAsFixed(0) + 'м';
+    return '';
   }
 }
 
