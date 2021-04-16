@@ -20,7 +20,7 @@ class UsersRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           ...List.generate(
-            3,
+            Provider.of<Data>(context).topUsersLength == null ? 0 : 3,
             (index) {
               User user;
               int currIndex = index;

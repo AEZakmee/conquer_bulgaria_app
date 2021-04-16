@@ -24,9 +24,9 @@ class Data extends ChangeNotifier {
   List<User> get topUsers => _topUsers;
   void changeTopUsers(List<User> users) {
     _topUsers = users;
-    _topUsers.forEach((element) {
-      print(element.totalPlaces);
-    });
+    // _topUsers.forEach((element) {
+    //   print(element.totalPlaces);
+    // });
     notifyListeners();
   }
 
@@ -58,7 +58,11 @@ class Data extends ChangeNotifier {
   UserLocation _currentLocation;
   void setCurrentUserLocation(UserLocation userLocation) {
     _currentLocation = userLocation;
-    _places.forEach((element) {
+  }
+
+  void calculateDistancePerTime() {
+    assert(_currentLocation != null, 'current location is null');
+    _places?.forEach((element) {
       element.range = calculateDistance(element.latitude, element.longitude,
           _currentLocation.latitude, _currentLocation.longitude);
     });

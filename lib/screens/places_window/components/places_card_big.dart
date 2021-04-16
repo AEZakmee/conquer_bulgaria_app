@@ -107,18 +107,19 @@ class BigPlacesCard extends StatelessWidget {
                   size: getProportionateScreenHeight(20),
                 ),
           Spacer(),
-          Padding(
-            padding: EdgeInsets.only(right: getProportionateScreenWidth(4)),
-            child: Text(
-              calculateRangeString(travelLocation.range),
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: travelLocation.range > 1000
-                    ? getProportionateScreenWidth(11)
-                    : getProportionateScreenWidth(13),
+          if (travelLocation.range != null)
+            Padding(
+              padding: EdgeInsets.only(right: getProportionateScreenWidth(4)),
+              child: Text(
+                calculateRangeString(travelLocation.range),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: travelLocation.range > 1000
+                      ? getProportionateScreenWidth(11)
+                      : getProportionateScreenWidth(13),
+                ),
               ),
             ),
-          ),
         ],
       ),
     );

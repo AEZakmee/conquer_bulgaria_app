@@ -72,7 +72,7 @@ class _SignUpFormState extends State<SignUpForm> {
         customFormField(
           myController: _emailController,
           label: 'Емайл',
-          hint: 'Въведете валиден емайл',
+          hint: 'Въведете емайл',
           icon: Icon(
             CupertinoIcons.mail,
             color: kPrimaryColor,
@@ -102,7 +102,7 @@ class _SignUpFormState extends State<SignUpForm> {
         customFormField(
           myController: _secondNameController,
           label: 'Фамилия',
-          hint: 'Въведете своята фамилия',
+          hint: 'Въведете фамилия',
           icon: Icon(
             CupertinoIcons.person,
             color: kPrimaryColor,
