@@ -66,48 +66,50 @@ class RatingsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        // SizedBox(
+        //   height: getProportionateScreenHeight(100),
+        // ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Expanded(
                   child: FittedBox(
-                    child: SvgPicture.asset(
-                      'assets/icons/star_fill.svg',
+                    child: Icon(
+                      Icons.star,
+                      color: Color(0xffffd814),
                     ),
                   ),
                 ),
-                FittedBox(
-                  child: Text(
-                    travelLocation.ratings.length != 0
-                        ? (travelLocation.ratings.reduce(
-                                        (value, element) => value + element) /
-                                    travelLocation.ratings.length)
-                                .toStringAsFixed(1) +
-                            '/5'
-                        : 'Няма гласове',
-                    style: TextStyle(fontWeight: FontWeight.w800),
-                  ),
+                Text(
+                  travelLocation.ratings.length != 0
+                      ? (travelLocation.ratings.reduce(
+                                      (value, element) => value + element) /
+                                  travelLocation.ratings.length)
+                              .toStringAsFixed(1) +
+                          '/5'
+                      : 'Няма гласове',
+                  style: TextStyle(fontWeight: FontWeight.w800),
                 ),
                 if (travelLocation.ratings.length != 0)
-                  FittedBox(
-                    child: Text('${travelLocation.ratings.length} глас' +
-                        ((travelLocation.ratings.length == 1) ? '' : 'а')),
-                  )
+                  Text('${travelLocation.ratings.length} глас' +
+                      ((travelLocation.ratings.length == 1) ? '' : 'а'))
               ],
             ),
           ),
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(6.0),
             child: Column(
               children: [
                 Expanded(
                   child: FittedBox(
-                    child: SvgPicture.asset(
-                      'assets/icons/star.svg',
+                    child: Icon(
+                      Icons.star_border,
+                      color: Color(0xffffd814),
+                      size: getProportionateScreenWidth(40),
                     ),
                   ),
                 ),
@@ -120,7 +122,7 @@ class RatingsRow extends StatelessWidget {
                       : 'Посети, за да гласуваш',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: getProportionateScreenWidth(13),
+                    fontSize: getProportionateScreenWidth(11),
                   ),
                   maxLines: 2,
                   textAlign: TextAlign.center,

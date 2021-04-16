@@ -145,7 +145,8 @@ class _SignUpFormState extends State<SignUpForm> {
                                 '${_secondName[0].toUpperCase()}${_secondName.substring(1)}',
                         'picture': 'none',
                         'totalPlaces': 0,
-                        'places': [-1]
+                        'places': [],
+                        'votedPlaces': []
                       }).whenComplete(() {
                         _btnController.success();
                         Navigator.popAndPushNamed(

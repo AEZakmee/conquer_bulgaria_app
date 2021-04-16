@@ -5,15 +5,22 @@ class User {
   String picture;
   int totalPlaces;
   List<int> places;
+  List<int> votedPlaces;
 
-  User({this.username, this.places, this.picture, this.totalPlaces});
+  User(
+      {this.username,
+      this.places,
+      this.picture,
+      this.totalPlaces,
+      this.votedPlaces});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
         username: json['username'],
         picture: json['picture'],
         totalPlaces: json['totalPlaces'],
-        places: List.from(json['places']));
+        places: List.from(json['places']),
+        votedPlaces: List.from(json['votedPlaces']));
   }
 
   Map<String, dynamic> toMap() {
@@ -21,7 +28,8 @@ class User {
       'username': username,
       'picture': picture,
       'totalPlaces': totalPlaces,
-      'places': places
+      'places': places,
+      'votedPlaces': votedPlaces
     };
   }
 
