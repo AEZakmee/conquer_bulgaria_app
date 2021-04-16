@@ -24,9 +24,6 @@ class Data extends ChangeNotifier {
   List<User> get topUsers => _topUsers;
   void changeTopUsers(List<User> users) {
     _topUsers = users;
-    // _topUsers.forEach((element) {
-    //   print(element.totalPlaces);
-    // });
     notifyListeners();
   }
 

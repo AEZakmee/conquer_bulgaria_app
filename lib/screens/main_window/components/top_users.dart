@@ -19,29 +19,30 @@ class UsersRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          ...List.generate(
-            Provider.of<Data>(context).topUsersLength == null ? 0 : 3,
-            (index) {
-              User user;
-              int currIndex = index;
-              if (index == 0) {
-                user = Provider.of<Data>(context).topUsers[index + 1];
-                currIndex = index + 1;
-              } else if (index == 1) {
-                user = Provider.of<Data>(context).topUsers[index - 1];
-                currIndex = index - 1;
-              } else
-                user = Provider.of<Data>(context).topUsers[index];
-              return TopPlace(
-                flex: index == 1 ? 5 : 4,
-                index: currIndex,
-                name: user.username,
-                points: user.totalPlaces,
-                isCurrentUser: (user.username ==
-                    Provider.of<Data>(context).currentUser.username),
-              );
-            },
-          )
+          if (Provider.of<Data>(context).topUsers.isNotEmpty)
+            ...List.generate(
+              3,
+              (index) {
+                User user;
+                int currIndex = index;
+                if (index == 0) {
+                  user = Provider.of<Data>(context).topUsers[index + 1];
+                  currIndex = index + 1;
+                } else if (index == 1) {
+                  user = Provider.of<Data>(context).topUsers[index - 1];
+                  currIndex = index - 1;
+                } else
+                  user = Provider.of<Data>(context).topUsers[index];
+                return TopPlace(
+                  flex: index == 1 ? 5 : 4,
+                  index: currIndex,
+                  name: user.username,
+                  points: user.totalPlaces,
+                  isCurrentUser: (user.username ==
+                      Provider.of<Data>(context).currentUser.username),
+                );
+              },
+            )
         ],
       ),
     );

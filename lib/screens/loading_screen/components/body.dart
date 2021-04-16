@@ -78,62 +78,59 @@ class _BodyState extends State<Body> with DisposableWidget {
     }
   }
 
-  StreamSubscription<LocationData> locationStream;
-  Location location = Location();
+  Location _location = Location();
   void getLocation() async {
     print('checking services');
     if (await _checkServicePermission() == false) return;
-    await _checkServiceEnabled();
-    calculateAndCheckService();
-    //some spaghetti code here
-    print('services are working');
-    if (serviceStarted == false) {
-      serviceStarted = true;
-      locationStreamCall();
-    }
+    await _checkAndStartService();
+    checkServiceChange();
   }
 
+  bool _serviceStarted = false;
+  Timer _serviceTimer;
+  void checkServiceChange() async {
+    _serviceTimer = Timer.periodic(Duration(seconds: 3), (Timer t) async {
+      _serviceEnabled = await _location.serviceEnabled();
+      if (_serviceEnabled && !_serviceStarted) {
+        _serviceStarted = true;
+        locationStreamCall();
+        calculate();
+        print('location stream started');
+      } else if (!_serviceEnabled && _serviceStarted) {
+        _serviceStarted = false;
+        _locationStream?.cancel();
+        _calculateTimer?.cancel();
+        print('location stream stopped');
+      }
+    });
+  }
+
+  StreamSubscription<LocationData> _locationStream;
   void locationStreamCall() {
     try {
-      locationStream = location.onLocationChanged().listen((event) {
+      _locationStream = _location.onLocationChanged().listen((event) {
         Provider.of<Data>(context, listen: false).setCurrentUserLocation(
             UserLocation(latitude: event.latitude, longitude: event.longitude));
       });
-      locationStream.canceledBy(this);
+      _locationStream.canceledBy(this);
     } catch (e) {
       print('Location error ' + e.toString());
     }
   }
 
-  void checkServiceOnly() async {
-    _serviceEnabled = await location.serviceEnabled();
-  }
-
-  bool serviceStarted = false;
-  Timer timer;
-  void calculateAndCheckService() async {
-    timer = Timer.periodic(Duration(seconds: 15), (Timer t) {
-      checkServiceOnly();
-      if (_serviceEnabled == true) {
-        print('recalculating distances');
-        Provider.of<Data>(context, listen: false).calculateDistancePerTime();
-        if (serviceStarted == false) {
-          serviceStarted = true;
-          locationStreamCall();
-        }
-      } else {
-        print('canceling stream');
-        locationStream?.cancel();
-        serviceStarted = false;
-      }
+  Timer _calculateTimer;
+  void calculate() async {
+    _calculateTimer = Timer.periodic(Duration(seconds: 15), (Timer t) {
+      print('recalculating distances');
+      Provider.of<Data>(context, listen: false).calculateDistancePerTime();
     });
   }
 
   PermissionStatus _permissionGranted;
   Future<bool> _checkServicePermission() async {
-    _permissionGranted = await location.hasPermission();
+    _permissionGranted = await _location.hasPermission();
     if (_permissionGranted == PermissionStatus.DENIED) {
-      _permissionGranted = await location.requestPermission();
+      _permissionGranted = await _location.requestPermission();
       if (_permissionGranted == PermissionStatus.GRANTED) {
         return true;
       } else
@@ -143,10 +140,10 @@ class _BodyState extends State<Body> with DisposableWidget {
   }
 
   bool _serviceEnabled;
-  Future<bool> _checkServiceEnabled() async {
-    _serviceEnabled = await location.serviceEnabled();
+  Future<bool> _checkAndStartService() async {
+    _serviceEnabled = await _location.serviceEnabled();
     if (_serviceEnabled == false) {
-      _serviceEnabled = await location.requestService();
+      _serviceEnabled = await _location.requestService();
     }
     return _serviceEnabled;
   }
@@ -160,7 +157,8 @@ class _BodyState extends State<Body> with DisposableWidget {
   @override
   void dispose() {
     cancelSubscriptions();
-    timer?.cancel();
+    _calculateTimer?.cancel();
+    _serviceTimer?.cancel();
     super.dispose();
   }
 
