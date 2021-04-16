@@ -19,8 +19,7 @@ class LocationInformation extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Container(
-            width: getProportionateScreenWidth(280),
+          Expanded(
             child: Text(
               Provider.of<Data>(context).chosenLocation.name,
               style: TextStyle(
@@ -30,11 +29,11 @@ class LocationInformation extends StatelessWidget {
               ),
             ),
           ),
-          Spacer(),
+          SizedBox(
+            width: getProportionateScreenWidth(12),
+          ),
           Padding(
-            padding: EdgeInsets.only(
-              right: 8,
-            ),
+            padding: EdgeInsets.only(right: 8.0),
             child: Text(
               calculateRangeString(
                   Provider.of<Data>(context).chosenLocation.range),

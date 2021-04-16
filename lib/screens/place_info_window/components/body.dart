@@ -22,13 +22,16 @@ class _BodyState extends State<Body> {
         children: [
           TopStack(),
           SizedBox(
-            height: getProportionateScreenHeight(80),
+            height: getProportionateScreenHeight(60),
           ),
           LocationInformation(),
           SizedBox(
             height: getProportionateScreenHeight(20),
           ),
-          LocationStory()
+          LocationStory(),
+          SizedBox(
+            height: getProportionateScreenHeight(80),
+          ),
         ],
       ),
     );

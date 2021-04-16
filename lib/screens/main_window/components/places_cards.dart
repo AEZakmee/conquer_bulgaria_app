@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conquer_bulgaria_app/model/cached_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
@@ -25,7 +26,7 @@ class PlacesCard extends StatelessWidget {
         Navigator.pushNamed(context, PlacesInfoWindow.routeName);
       },
       child: SizedBox(
-        width: getProportionateScreenHeight(130),
+        width: getProportionateScreenWidth(130),
         child: Column(
           children: [
             Hero(
@@ -43,7 +44,8 @@ class PlacesCard extends StatelessWidget {
               ),
             ),
             Container(
-              width: getProportionateScreenHeight(130),
+              width: getProportionateScreenWidth(130),
+              height: getProportionateScreenHeight(60),
               padding: EdgeInsets.all(
                 getProportionateScreenWidth(10),
               ),
@@ -55,19 +57,16 @@ class PlacesCard extends StatelessWidget {
                   bottomRight: Radius.circular(20),
                 ),
               ),
-              child: Column(
-                children: [
-                  Text(
-                    travelLocation.name,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.blueGrey,
-                      fontSize: getProportionateScreenWidth(
-                          10 + (5 / travelLocation.name.length) * 9),
-                    ),
-                  ),
-                ],
+              child: AutoSizeText(
+                travelLocation.name,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.blueGrey,
+                  fontSize: getProportionateScreenWidth(
+                      13 + (5 / travelLocation.name.length) * 9),
+                ),
+                maxLines: 2,
               ),
             ),
             SizedBox(

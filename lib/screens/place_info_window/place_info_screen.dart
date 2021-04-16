@@ -17,7 +17,7 @@ class PlacesInfoWindow extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: Colors.black,
             size: getProportionateScreenHeight(50),
           ),
           onPressed: () {
