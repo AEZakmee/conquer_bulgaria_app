@@ -42,8 +42,8 @@ class _BodyState extends State<Body> with DisposableWidget {
 
         _db
             .collection('users')
-            .orderBy('totalPlaces')
-            .limit(10)
+            .orderBy('totalPlaces', descending: true)
+            .limit(20)
             .snapshots()
             .listen((querySnapshot) {
           print('listening for top users');
@@ -132,8 +132,8 @@ class _BodyState extends State<Body> with DisposableWidget {
 
   @override
   void dispose() {
-    super.dispose();
     cancelSubscriptions();
+    super.dispose();
   }
 
   @override

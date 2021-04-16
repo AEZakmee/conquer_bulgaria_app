@@ -104,13 +104,19 @@ class BigPlacesCard extends StatelessWidget {
               : Icon(
                   Icons.close,
                   color: Colors.red,
+                  size: getProportionateScreenHeight(20),
                 ),
           Spacer(),
           Padding(
-            padding: EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.only(right: getProportionateScreenWidth(4)),
             child: Text(
               calculateRangeString(travelLocation.range),
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: travelLocation.range > 1000
+                    ? getProportionateScreenWidth(11)
+                    : getProportionateScreenWidth(13),
+              ),
             ),
           ),
         ],
@@ -120,7 +126,7 @@ class BigPlacesCard extends StatelessWidget {
 
   String calculateRangeString(double range) {
     if (range == null) return '';
-    if (range > 1000) return '>1000км';
+    if (range > 10000) return '10000км';
     if (range > 1) return range.toStringAsFixed(1) + 'км';
     //print(range);
     if (range > 0) return (range * 100).toStringAsFixed(0) + 'м';

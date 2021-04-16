@@ -13,7 +13,7 @@ Widget customFormField({
     showCursor: true,
     controller: myController,
     cursorColor: kPrimaryColor,
-    obscureText: label == 'Password' ? true : false,
+    obscureText: label == 'Парола' ? true : false,
     decoration: InputDecoration(
       floatingLabelBehavior: FloatingLabelBehavior.always,
       enabledBorder: kOutlineInputBorder,

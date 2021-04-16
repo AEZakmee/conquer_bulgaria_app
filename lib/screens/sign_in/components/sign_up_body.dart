@@ -55,12 +55,14 @@ class _SignUpFormState extends State<SignUpForm> {
   final _firestore = Firestore.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _usernameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _secondNameController = TextEditingController();
   final _btnController = new RoundedLoadingButtonController();
 
   String get _email => _emailController.text.trim();
   String get _pass => _passwordController.text.trim();
-  String get _username => _usernameController.text.trim();
+  String get _firstName => _firstNameController.text.trim();
+  String get _secondName => _secondNameController.text.trim();
   String error;
 
   @override
@@ -69,8 +71,8 @@ class _SignUpFormState extends State<SignUpForm> {
       children: [
         customFormField(
           myController: _emailController,
-          label: 'Email',
-          hint: 'Enter Email',
+          label: 'Емайл',
+          hint: 'Въведете валиден емайл',
           icon: Icon(
             CupertinoIcons.mail,
             color: kPrimaryColor,
@@ -79,8 +81,8 @@ class _SignUpFormState extends State<SignUpForm> {
         SizedBox(height: getProportionateScreenHeight(20)),
         customFormField(
           myController: _passwordController,
-          label: 'Password',
-          hint: 'Enter your Password',
+          label: 'Парола',
+          hint: 'Въведете парола',
           icon: Icon(
             CupertinoIcons.padlock,
             color: kPrimaryColor,
@@ -88,9 +90,19 @@ class _SignUpFormState extends State<SignUpForm> {
         ),
         SizedBox(height: getProportionateScreenHeight(20)),
         customFormField(
-          myController: _usernameController,
-          label: 'Username',
-          hint: 'Enter your Username',
+          myController: _firstNameController,
+          label: 'Име',
+          hint: 'Въведете вашето име',
+          icon: Icon(
+            CupertinoIcons.person,
+            color: kPrimaryColor,
+          ),
+        ),
+        SizedBox(height: getProportionateScreenHeight(20)),
+        customFormField(
+          myController: _secondNameController,
+          label: 'Фамилия',
+          hint: 'Въведете своята фамилия',
           icon: Icon(
             CupertinoIcons.person,
             color: kPrimaryColor,
@@ -108,48 +120,62 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
         SizedBox(height: getProportionateScreenHeight(20)),
         DefaultLoadingButton(
-            text: 'Register',
+            text: 'Регистрация',
             controller: _btnController,
             onPress: () async {
               if (_email.isNotEmpty &&
                   _pass.isNotEmpty &&
-                  _username.isNotEmpty) {
-                try {
-                  await _auth.createUserWithEmailAndPassword(
-                    email: _email,
-                    password: _pass,
-                  );
-                  final newUser = await _auth.currentUser();
-                  if (newUser != null) {
-                    _firestore
-                        .collection('users')
-                        .document(_email.toLowerCase())
-                        .setData({
-                      'username': _username,
-                      'picture': 'none',
-                      'totalPlaces': 0,
-                      'places': [-1]
-                    }).whenComplete(() {
-                      _btnController.success();
-                      Navigator.popAndPushNamed(
-                          context, LoadingScreen.routeName);
+                  _firstName.isNotEmpty &&
+                  _secondName.isNotEmpty) {
+                if (checkNames(_firstName, _secondName)) {
+                  try {
+                    await _auth.createUserWithEmailAndPassword(
+                      email: _email,
+                      password: _pass,
+                    );
+                    final newUser = await _auth.currentUser();
+                    if (newUser != null) {
+                      _firestore
+                          .collection('users')
+                          .document(_email.toLowerCase())
+                          .setData({
+                        'username':
+                            '${_firstName[0].toUpperCase()}${_firstName.substring(1)}' +
+                                ' ' +
+                                '${_secondName[0].toUpperCase()}${_secondName.substring(1)}',
+                        'picture': 'none',
+                        'totalPlaces': 0,
+                        'places': [-1]
+                      }).whenComplete(() {
+                        _btnController.success();
+                        Navigator.popAndPushNamed(
+                            context, LoadingScreen.routeName);
+                      });
+                    }
+                  } catch (e) {
+                    //TODO: catch all exceptions
+                    _btnController.error();
+                    setState(() {
+                      error = e.toString();
                     });
+                    Timer(Duration(seconds: 1), () {
+                      _btnController.reset();
+                    });
+                    print(e);
                   }
-                } catch (e) {
-                  //TODO: catch all exceptions
+                } else {
                   _btnController.error();
                   setState(() {
-                    error = e.toString();
+                    error = 'Моля въведете валидни имена';
                   });
                   Timer(Duration(seconds: 1), () {
                     _btnController.reset();
                   });
-                  print(e);
                 }
               } else {
                 _btnController.error();
                 setState(() {
-                  error = 'Please fill all the required information';
+                  error = 'Моля въведете цялата необходима информация';
                 });
                 Timer(Duration(seconds: 1), () {
                   _btnController.reset();
@@ -164,5 +190,14 @@ class _SignUpFormState extends State<SignUpForm> {
         ),
       ],
     );
+  }
+
+  bool checkNames(String first, String second) {
+    if (first.length < 3 || second.length < 3) return false;
+    if (first.contains(RegExp(r'[^A-Za-zА-Яа-я]')) ||
+        second.contains(RegExp(r'[^A-Za-zА-Яа-я]'))) {
+      return false;
+    } else
+      return true;
   }
 }

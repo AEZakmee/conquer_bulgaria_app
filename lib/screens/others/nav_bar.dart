@@ -1,4 +1,5 @@
 import 'package:conquer_bulgaria_app/constants.dart';
+import 'package:conquer_bulgaria_app/screens/leaderboard/leaderboard_screen.dart';
 import 'package:conquer_bulgaria_app/screens/places_window/places_window_screen.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,11 @@ class NavBar extends StatelessWidget {
                 },
               ),
               NavItem(
-                icon: Icons.chat,
-                title: sChat,
-                press: () {},
+                icon: Icons.leaderboard,
+                title: 'Класация',
+                press: () {
+                  Navigator.pushNamed(context, LeaderBoardWindow.routeName);
+                },
               ),
               NavItem(
                 icon: Icons.map,
@@ -65,8 +68,8 @@ class NavItem extends StatelessWidget {
       onTap: press,
       child: Container(
         padding: EdgeInsets.all(5),
-        height: getProportionateScreenWidth(50),
-        width: getProportionateScreenWidth(60),
+        height: getProportionateScreenHeight(55),
+        width: getProportionateScreenWidth(100),
         child: Column(
           children: [
             Icon(

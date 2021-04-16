@@ -19,26 +19,30 @@ class TitleSeeAll extends StatelessWidget {
         horizontal: getProportionateScreenWidth(20),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             text,
             style: TextStyle(
               color: kBoldTextColor,
-              fontWeight: FontWeight.w800,
-              fontSize: getProportionateScreenHeight(18),
+              fontWeight: (hasSeeAllButton) ? FontWeight.w800 : FontWeight.bold,
+              fontSize: hasSeeAllButton
+                  ? getProportionateScreenHeight(18)
+                  : getProportionateScreenHeight(24),
             ),
           ),
-          Spacer(),
-          GestureDetector(
-            onTap: hasSeeAllButton ? onClick : () {},
-            child: Text(
-              (hasSeeAllButton) ? sSeeAll : '',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: getProportionateScreenHeight(16),
+          if (hasSeeAllButton) Spacer(),
+          if (hasSeeAllButton)
+            GestureDetector(
+              onTap: hasSeeAllButton ? onClick : () {},
+              child: Text(
+                sSeeAll,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: getProportionateScreenHeight(16),
+                ),
               ),
             ),
-          ),
         ],
       ),
     );

@@ -6,8 +6,10 @@ import 'package:conquer_bulgaria_app/screens/places_window/places_window_screen.
 import 'package:conquer_bulgaria_app/size_config.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
+import '../../../constants.dart';
 import 'bot_part.dart';
 import 'places_cards.dart';
 import 'search_field.dart';
@@ -71,19 +73,35 @@ class _BodyState extends State<Body> {
             ),
           ),
           SizedBox(
-            height: getProportionateScreenHeight(20),
+            height: getProportionateScreenHeight(40),
           ),
-          TitleSeeAll(
-            text: sTopUsers,
-            hasSeeAllButton: false,
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
-          UsersRow(),
-          SizedBox(
-            height: getProportionateScreenHeight(30),
-          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.blueGrey.shade100,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50),
+                topRight: Radius.circular(50),
+              ),
+            ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: getProportionateScreenHeight(10),
+                ),
+                TitleSeeAll(
+                  text: sTopUsers,
+                  hasSeeAllButton: false,
+                ),
+                SizedBox(
+                  height: getProportionateScreenHeight(10),
+                ),
+                UsersRow(),
+                SizedBox(
+                  height: getProportionateScreenHeight(20),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

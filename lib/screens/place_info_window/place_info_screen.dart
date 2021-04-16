@@ -18,7 +18,7 @@ class PlacesInfoWindow extends StatelessWidget {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: getProportionateScreenHeight(70),
+            size: getProportionateScreenHeight(50),
           ),
           onPressed: () {
             Navigator.pop(context);

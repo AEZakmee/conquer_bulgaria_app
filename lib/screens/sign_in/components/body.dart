@@ -60,8 +60,8 @@ class _SignInFormState extends State<SignInForm> {
       children: [
         customFormField(
           myController: _emailController,
-          label: 'Email',
-          hint: 'Enter Email',
+          label: 'Емайл',
+          hint: 'Въведете емайл',
           icon: Icon(
             CupertinoIcons.mail,
             color: kPrimaryColor,
@@ -70,8 +70,8 @@ class _SignInFormState extends State<SignInForm> {
         SizedBox(height: getProportionateScreenHeight(20)),
         customFormField(
           myController: _passwordController,
-          label: 'Password',
-          hint: 'Enter your Password',
+          label: 'Парола',
+          hint: 'Въведете парола',
           icon: Icon(
             CupertinoIcons.padlock,
             color: kPrimaryColor,
@@ -90,7 +90,7 @@ class _SignInFormState extends State<SignInForm> {
         SizedBox(height: getProportionateScreenHeight(20)),
         DefaultLoadingButton(
           controller: _btnController,
-          text: 'Log in',
+          text: 'Влез',
           onPress: () async {
             if (_email.isNotEmpty && _pass.isNotEmpty) {
               try {
@@ -114,7 +114,7 @@ class _SignInFormState extends State<SignInForm> {
             } else {
               _btnController.error();
               setState(() {
-                error = 'Please enter Email/Password';
+                error = 'Моля напишете емейл/парола';
               });
               Timer(Duration(seconds: 1), () {
                 _btnController.reset();
