@@ -75,9 +75,12 @@ class TopUser extends StatelessWidget {
             if (index < 3)
               Expanded(
                 flex: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset('assets/images/${index + 1}_place.png'),
+                child: Hero(
+                  tag: 'assets${index + 1}',
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset('assets/images/${index + 1}_place.png'),
+                  ),
                 ),
               ),
             if (index >= 3)

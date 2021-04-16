@@ -16,7 +16,14 @@ class Data extends ChangeNotifier {
   List<TravelLocation> _places = [];
   List<TravelLocation> get places => _places;
   void loadPlaces(List<TravelLocation> places) {
-    _places = places;
+    if (_places == null) _places = places;
+    if (_places.length < places.length)
+      _places = places;
+    else {
+      for (int i = 0; i < _places.length; i++) {
+        _places[i].ratings = places[i].ratings;
+      }
+    }
     notifyListeners();
   }
 

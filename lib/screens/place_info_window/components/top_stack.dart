@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conquer_bulgaria_app/model/cached_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -43,88 +45,119 @@ class TopStack extends StatelessWidget {
               ),
               boxShadow: [kBoxShadow],
             ),
-            child: Row(
+            child: RatingsRow(
+              travelLocation: Provider.of<Data>(context).chosenLocation,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class RatingsRow extends StatelessWidget {
+  const RatingsRow({
+    Key key,
+    this.travelLocation,
+  }) : super(key: key);
+  final TravelLocation travelLocation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
               children: [
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: FittedBox(
-                            child: SvgPicture.asset(
-                              'assets/icons/star_fill.svg',
-                            ),
-                          ),
-                        ),
-                        FittedBox(
-                          child: Text(
-                            '8,4/10',
-                            style: TextStyle(fontWeight: FontWeight.w800),
-                          ),
-                        ),
-                        FittedBox(
-                          child: Text('123 гласа'),
-                        )
-                      ],
+                  child: FittedBox(
+                    child: SvgPicture.asset(
+                      'assets/icons/star_fill.svg',
                     ),
                   ),
                 ),
+                FittedBox(
+                  child: Text(
+                    travelLocation.ratings.length != 0
+                        ? (travelLocation.ratings.reduce(
+                                        (value, element) => value + element) /
+                                    travelLocation.ratings.length)
+                                .toStringAsFixed(1) +
+                            '/5'
+                        : 'Няма гласове',
+                    style: TextStyle(fontWeight: FontWeight.w800),
+                  ),
+                ),
+                if (travelLocation.ratings.length != 0)
+                  FittedBox(
+                    child: Text('${travelLocation.ratings.length} глас' +
+                        ((travelLocation.ratings.length == 1) ? '' : 'а')),
+                  )
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: FittedBox(
-                            child: SvgPicture.asset(
-                              'assets/icons/star.svg',
-                            ),
-                          ),
-                        ),
-                        FittedBox(
-                          child: Text(
-                            'Гласувай',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: getProportionateScreenWidth(13),
-                            ),
-                          ),
-                        ),
-                      ],
+                  child: FittedBox(
+                    child: SvgPicture.asset(
+                      'assets/icons/star.svg',
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: FittedBox(
-                            child: Icon(
-                              Icons.navigation,
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                        ),
-                        FittedBox(
-                          child: Text(
-                            'Навигация',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: getProportionateScreenWidth(13),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                AutoSizeText(
+                  (Provider.of<Data>(context)
+                          .currentUser
+                          .places
+                          .contains(travelLocation.id))
+                      ? 'Гласувай'
+                      : 'Посети, за да гласуваш',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: getProportionateScreenWidth(13),
                   ),
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),
           ),
-        )
+        ),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: FittedBox(
+                      child: Icon(
+                        Icons.navigation,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ),
+                  FittedBox(
+                    child: Text(
+                      'Навигация',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: getProportionateScreenWidth(13),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

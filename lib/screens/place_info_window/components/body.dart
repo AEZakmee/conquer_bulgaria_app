@@ -8,7 +8,12 @@ import 'package:provider/provider.dart';
 import 'location_info.dart';
 import 'top_stack.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

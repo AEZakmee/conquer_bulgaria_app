@@ -96,10 +96,13 @@ class TopPlace extends StatelessWidget {
                 SizedBox(
                   height: getProportionateScreenHeight(7),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(9)),
-                  child: Image.asset('assets/images/${index + 1}_place.png'),
+                Hero(
+                  tag: 'assets${index + 1}',
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getProportionateScreenWidth(9)),
+                    child: Image.asset('assets/images/${index + 1}_place.png'),
+                  ),
                 ),
                 SizedBox(
                   height: getProportionateScreenHeight(10),
