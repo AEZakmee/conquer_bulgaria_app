@@ -1,16 +1,16 @@
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
-import 'package:conquer_bulgaria_app/screens/main_window/main_window_screen.dart';
-import 'package:conquer_bulgaria_app/size_config.dart';
 import 'package:provider/provider.dart';
-
 import 'routes.dart';
-import 'screens/splash/splash_screen.dart';
 import 'strings.dart';
 import 'theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(MyApp());
 }
 

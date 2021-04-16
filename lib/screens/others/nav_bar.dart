@@ -39,8 +39,8 @@ class NavBar extends StatelessWidget {
                 },
               ),
               NavItem(
-                icon: Icons.map,
-                title: sMap,
+                icon: Icons.add_to_queue,
+                title: 'НЕЩОО?',
                 press: () {},
               ),
             ],
