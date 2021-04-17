@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 
+import 'loading_screen.dart';
+
 class Body extends StatefulWidget {
   @override
   _BodyState createState() => _BodyState();
@@ -69,7 +71,7 @@ class _BodyState extends State<Body> with DisposableWidget {
         try {
           _auth.signOut();
         } catch (e) {
-          print('cant signout, no sign in;/');
+          print('Something went wrong signing-out');
         }
         Navigator.popAndPushNamed(context, SplashScreen.routeName);
       }
@@ -164,41 +166,6 @@ class _BodyState extends State<Body> with DisposableWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Conquer',
-              style: TextStyle(
-                fontFamily: kCoolFont,
-                color: kPrimaryColor,
-                fontSize: getProportionateScreenWidth(80),
-              ),
-            ),
-            SizedBox(
-              height: getProportionateScreenHeight(20),
-            ),
-            SizedBox(
-              width: getProportionateScreenWidth(150),
-              child: Image.asset('assets/images/loading_flag.png'),
-            ),
-            SizedBox(
-              height: getProportionateScreenHeight(20),
-            ),
-            Text(
-              'Bulgaria',
-              style: TextStyle(
-                fontFamily: kCoolFont,
-                color: kPrimaryColor,
-                fontSize: getProportionateScreenWidth(80),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return LoadingScreenWidget();
   }
 }

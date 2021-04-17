@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../size_config.dart';
-import 'components/body.dart';
+import 'components/loading_methods.dart';
 
 class LoadingScreen extends StatelessWidget {
   static String routeName = '/loading_window';

@@ -4,11 +4,11 @@ import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:conquer_bulgaria_app/model/user_location.dart';
 import 'package:conquer_bulgaria_app/model/user_profile.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:location/location.dart';
 
 class Data extends ChangeNotifier {
   User currentUser = User();
   void changeCurrentUser(User user) {
+    print(user.places.toString() + ' ' + user.totalPlaces.toString());
     currentUser = user;
     notifyListeners();
   }
@@ -36,11 +36,6 @@ class Data extends ChangeNotifier {
 
   int get placesLength => _places.length ?? 0;
   int get topUsersLength => _topUsers.length ?? 0;
-
-  void userVisitedPlace(int id) {
-    currentUser.places.add(id);
-    notifyListeners();
-  }
 
   TravelLocation _chosenLocation;
   TravelLocation get chosenLocation => _chosenLocation;

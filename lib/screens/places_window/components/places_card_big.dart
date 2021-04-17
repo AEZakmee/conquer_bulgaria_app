@@ -1,6 +1,6 @@
-import 'package:conquer_bulgaria_app/model/cached_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
+import 'package:conquer_bulgaria_app/screens/others/cached_image.dart';
 import 'package:conquer_bulgaria_app/screens/place_info_window/place_info_screen.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
 import 'package:flutter/cupertino.dart';
@@ -130,7 +130,7 @@ class BigPlacesCard extends StatelessWidget {
     if (range > 10000) return '10000км';
     if (range > 1) return range.toStringAsFixed(1) + 'км';
     //print(range);
-    if (range > 0) return (range * 100).toStringAsFixed(0) + 'м';
+    if (range > 0) return (range * 1000).toStringAsFixed(0) + 'м';
     return '';
   }
 }

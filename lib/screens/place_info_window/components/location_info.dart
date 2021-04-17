@@ -52,8 +52,8 @@ class LocationInformation extends StatelessWidget {
     if (range == null) return '';
     if (range > 1000) return '>1000км';
     if (range > 1) return range.toStringAsFixed(1) + 'км';
-    print(range);
-    if (range > 0) return (range * 100).toStringAsFixed(0) + 'м';
+    //print(range);
+    if (range > 0) return (range * 1000).toStringAsFixed(0) + 'м';
     return '';
   }
 }

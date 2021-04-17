@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 
-import '../constants.dart';
-import 'travel_location.dart';
+import '../../constants.dart';
+import '../../model/travel_location.dart';
 
 class CustomCachedImage extends StatelessWidget {
   const CustomCachedImage({

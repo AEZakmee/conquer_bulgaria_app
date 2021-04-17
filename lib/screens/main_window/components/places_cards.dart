@@ -1,8 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conquer_bulgaria_app/model/cached_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
+import 'package:conquer_bulgaria_app/screens/others/cached_image.dart';
 import 'package:conquer_bulgaria_app/screens/place_info_window/place_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

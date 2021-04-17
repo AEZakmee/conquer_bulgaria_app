@@ -1,11 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conquer_bulgaria_app/model/cached_image.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:conquer_bulgaria_app/model/user_location.dart';
+import 'package:conquer_bulgaria_app/screens/others/cached_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -115,9 +113,17 @@ class RatingsRow extends StatelessWidget {
         Expanded(
           child: InkWell(
             onTap: () async {
+              UserLocation ul =
+                  Provider.of<Data>(context, listen: false).currentUserLocation;
               //https://stackoverflow.com/questions/15042283/current-location-google-maps-link-to-directions
-              String url =
-                  'https://www.google.com/maps?saddr=My+Location&daddr=${travelLocation.latitude},${travelLocation.longitude}';
+              String url;
+              if (ul == null) {
+                url =
+                    'https://www.google.com/maps?saddr=My+Location&daddr=${travelLocation.latitude},${travelLocation.longitude}';
+              } else {
+                url =
+                    'https://www.google.com/maps?saddr=${ul.latitude},${ul.longitude}&daddr=${travelLocation.latitude},${travelLocation.longitude}';
+              }
               await launch(url);
             },
             child: Padding(
