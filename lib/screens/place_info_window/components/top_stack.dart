@@ -3,6 +3,7 @@ import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:conquer_bulgaria_app/model/user_location.dart';
 import 'package:conquer_bulgaria_app/screens/others/cached_image.dart';
+import 'package:conquer_bulgaria_app/screens/place_info_window/components/voting_star.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -71,7 +72,7 @@ class RatingsRow extends StatelessWidget {
         // ),
         Expanded(
           child: Padding(
-            padding: travelLocation.ratings.length != 0
+            padding: travelLocation.numberRating != 0
                 ? EdgeInsets.all(6.0)
                 : EdgeInsets.all(14),
             child: Column(
@@ -86,19 +87,15 @@ class RatingsRow extends StatelessWidget {
                 ),
                 FittedBox(
                   child: Text(
-                    travelLocation.ratings.length != 0
-                        ? (travelLocation.ratings.reduce(
-                                        (value, element) => value + element) /
-                                    travelLocation.ratings.length)
-                                .toStringAsFixed(1) +
-                            '/5'
+                    travelLocation.numberRating != 0
+                        ? travelLocation.overallRating.toStringAsFixed(1) + '/5'
                         : 'Няма гласове',
                     style: TextStyle(fontWeight: FontWeight.w800),
                   ),
                 ),
-                if (travelLocation.ratings.length != 0)
-                  Text('${travelLocation.ratings.length} глас' +
-                      ((travelLocation.ratings.length == 1) ? '' : 'а'))
+                if (travelLocation.numberRating != 0)
+                  Text('${travelLocation.numberRating} глас' +
+                      ((travelLocation.numberRating == 1) ? '' : 'а'))
               ],
             ),
           ),
@@ -153,79 +150,6 @@ class RatingsRow extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class VotingStar extends StatelessWidget {
-  const VotingStar({
-    Key key,
-    @required this.travelLocation,
-    this.voted = false,
-  }) : super(key: key);
-
-  final TravelLocation travelLocation;
-  final bool voted;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: InkWell(
-        onTap: (!voted &&
-                Provider.of<Data>(context)
-                    .currentUser
-                    .places
-                    .contains(travelLocation.id))
-            ? () {
-                print('voting');
-              }
-            : null,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: FittedBox(
-                  child: Icon(
-                    voted ? Icons.tag_faces : Icons.star_border,
-                    color: Color(0xffffd814),
-                    size: getProportionateScreenWidth(40),
-                  ),
-                ),
-              ),
-              voted
-                  ? AutoSizeText(
-                      'Вотът ви е запаметен',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: getProportionateScreenWidth(11),
-                      ),
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                    )
-                  : AutoSizeText(
-                      (Provider.of<Data>(context)
-                              .currentUser
-                              .places
-                              .contains(travelLocation.id))
-                          ? 'Гласувай'
-                          : 'Посети, за да гласуваш',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: Provider.of<Data>(context)
-                                .currentUser
-                                .places
-                                .contains(travelLocation.id)
-                            ? getProportionateScreenWidth(14)
-                            : getProportionateScreenWidth(11),
-                      ),
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                    ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

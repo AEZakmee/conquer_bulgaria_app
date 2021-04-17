@@ -19,13 +19,13 @@ AppBar buildAppBar(BuildContext context) {
       onPressed: () {
         //FirebaseAuth.instance.signOut();
         //Todo menu functionality
-        // print('uploading data');
-        // PlacesData().placesForUpload.forEach((element) {
-        //   Firestore.instance
-        //       .collection('places')
-        //       .document(element.id.toString())
-        //       .setData(element.toMap());
-        // });
+        print('uploading data');
+        PlacesData().placesForUpload.forEach((element) {
+          Firestore.instance
+              .collection('places')
+              .document(element.id.toString())
+              .setData(element.toMap());
+        });
       },
     ),
     // actions: [

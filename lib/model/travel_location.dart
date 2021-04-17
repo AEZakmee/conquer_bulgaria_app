@@ -8,7 +8,9 @@ class TravelLocation {
   double longitude;
   double latitude;
   double range;
-  List<int> ratings;
+  double overallRating;
+  double totalRating;
+  int numberRating;
   TravelLocation(
       {this.name,
       this.image,
@@ -18,20 +20,25 @@ class TravelLocation {
       this.info,
       this.latitude,
       this.longitude,
-      this.ratings,
+      this.overallRating,
+      this.totalRating,
+      this.numberRating,
       this.imageHash});
 
   factory TravelLocation.fromJson(Map<String, dynamic> json) {
     return TravelLocation(
-        name: json['name'],
-        image: json['image'],
-        imageHash: json['imageHash'],
-        town: json['town'],
-        id: json['id'],
-        info: json['info'],
-        latitude: json['latitude'],
-        longitude: json['longitude'],
-        ratings: List.from(json['ratings']));
+      name: json['name'],
+      image: json['image'],
+      imageHash: json['imageHash'],
+      town: json['town'],
+      id: json['id'],
+      info: json['info'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+      overallRating: json['overallRating'],
+      totalRating: json['totalRating'],
+      numberRating: json['numberRating'],
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -44,7 +51,9 @@ class TravelLocation {
       'info': info,
       'latitude': latitude,
       'longitude': longitude,
-      'ratings': ratings,
+      'totalRating': totalRating,
+      'overallRating': overallRating,
+      'numberRating': numberRating,
     };
   }
 }
@@ -62,7 +71,9 @@ class PlacesData {
         imageHash: 'L9GSVv?pIW00Dd=htR9F.j01?cnl',
         latitude: 41.835167,
         longitude: 23.488167,
-        ratings: []),
+        overallRating: 0,
+        totalRating: 0,
+        numberRating: 0),
     TravelLocation(
         id: 2,
         town: "Банско",
@@ -74,7 +85,9 @@ class PlacesData {
         imageHash: 'LNG]BPWQ~pIn=~4.xuM{.QtM%LWm',
         latitude: 41.8354,
         longitude: 23.48709,
-        ratings: []),
+        overallRating: 0,
+        totalRating: 0,
+        numberRating: 0),
     TravelLocation(
         id: 3,
         town: "Банско",
@@ -86,7 +99,9 @@ class PlacesData {
         imageHash: 'LJG8_+00kXIB~q9Fxujs%NIUaet7',
         latitude: 41.837355,
         longitude: 23.48866,
-        ratings: []),
+        overallRating: 0,
+        totalRating: 0,
+        numberRating: 0),
     TravelLocation(
         id: 4,
         town: "Банско",
@@ -98,7 +113,9 @@ class PlacesData {
         imageHash: 'LJF#H^?Ko%i^%gXBIubuW9IURkR-',
         latitude: 41.836094,
         longitude: 23.488244,
-        ratings: []),
+        overallRating: 0,
+        totalRating: 0,
+        numberRating: 0),
     TravelLocation(
         id: 5,
         town: "Банско",
@@ -110,6 +127,8 @@ class PlacesData {
         imageHash: 'LmLN*:xb4nja_N%MITj[xuM{WBof',
         latitude: 41.835694,
         longitude: 23.487222,
-        ratings: []),
+        overallRating: 0,
+        totalRating: 0,
+        numberRating: 0),
   ];
 }

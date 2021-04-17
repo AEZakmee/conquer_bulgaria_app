@@ -16,14 +16,14 @@ class Data extends ChangeNotifier {
   List<TravelLocation> _places = [];
   List<TravelLocation> get places => _places;
   void loadPlaces(List<TravelLocation> places) {
-    if (_places == null) _places = places;
-    if (_places.length < places.length)
+    if (_places.isEmpty || _places == null || _places.length < places.length)
       _places = places;
-    else {
-      for (int i = 0; i < _places.length; i++) {
-        _places[i].ratings = places[i].ratings;
+    else
+      for (int i = 0; i < places.length; i++) {
+        _places[i].overallRating = places[i].overallRating;
+        _places[i].totalRating = places[i].totalRating;
+        _places[i].numberRating = places[i].numberRating;
       }
-    }
     notifyListeners();
   }
 
@@ -42,15 +42,6 @@ class Data extends ChangeNotifier {
   void setChosenLocation(TravelLocation place) {
     _chosenLocation = place;
     notifyListeners();
-  }
-
-  Future<List<TravelLocation>> getSuggestions(String pattern) async {
-    await Future.delayed(Duration(seconds: 1));
-    List<TravelLocation> searched = [];
-    if (pattern.length > 3) {
-      _places.forEach((e) => searched.add(e));
-    }
-    return searched;
   }
 
   UserLocation get currentUserLocation => _currentLocation;
