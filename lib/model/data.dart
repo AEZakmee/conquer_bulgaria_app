@@ -1,11 +1,14 @@
 import 'dart:math';
 
+import 'package:conquer_bulgaria_app/model/filters.dart';
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:conquer_bulgaria_app/model/user_location.dart';
 import 'package:conquer_bulgaria_app/model/user_profile.dart';
 import 'package:flutter/cupertino.dart';
 
 class Data extends ChangeNotifier {
+  PlaceFilters placeFilters = PlaceFilters();
+
   User currentUser = User();
   void changeCurrentUser(User user) {
     print(user.places.toString() + ' ' + user.totalPlaces.toString());
@@ -13,24 +16,46 @@ class Data extends ChangeNotifier {
     notifyListeners();
   }
 
+  //Map<int, TravelLocation> placesData;
   List<TravelLocation> _places = [];
   List<TravelLocation> get places => _places;
   List<TravelLocation> get sortedPlaces {
-    if (_places[0].range == null) return _places;
-    var sortedPlaces = _places;
-    sortedPlaces.sort((a, b) => a.range.compareTo(b.range));
-    return sortedPlaces;
+    switch (placeFilters.sortType) {
+      case sortBy.range:
+        if (_places[0].range == null) return _places;
+        _places.sort((a, b) => a.range.compareTo(b.range));
+        return _places;
+      case sortBy.rating:
+        _places
+            .sort((a, b) => (a.overallRating == null || b.overallRating == null)
+                ? 0
+                : a.overallRating > b.overallRating
+                    ? 0
+                    : 1);
+        return _places;
+      case sortBy.number:
+        _places.sort((a, b) => a.id > b.id ? 1 : 0);
+        return _places;
+      default:
+        return _places;
+    }
+  }
+
+  void toggleFilterSortBy(sortBy value) {
+    placeFilters.sortType = value;
+    notifyListeners();
   }
 
   void loadPlaces(List<TravelLocation> places) {
     if (_places.isEmpty || _places == null || _places.length < places.length)
       _places = places;
     else
-      for (int i = 0; i < places.length; i++) {
-        _places[i].overallRating = places[i].overallRating;
-        _places[i].totalRating = places[i].totalRating;
-        _places[i].numberRating = places[i].numberRating;
-      }
+      _places.sort((a, b) => a.id > b.id ? 1 : 0);
+    for (int i = 0; i < places.length; i++) {
+      _places[i].overallRating = places[i].overallRating;
+      _places[i].totalRating = places[i].totalRating;
+      _places[i].numberRating = places[i].numberRating;
+    }
     notifyListeners();
   }
 
@@ -75,36 +100,3 @@ class Data extends ChangeNotifier {
     return 12742 * asin(sqrt(a));
   }
 }
-
-// class FirestoreService {
-//   Firestore _db = Firestore.instance;
-//   Stream<List<User>> getUsers() {
-//     return _db.collection('users').snapshots().map((snapshot) =>
-//         snapshot.documents.map((doc) => User.fromJson(doc.data)).toList());
-//   }
-//
-//   Future<List<User>> getTopUsers() {
-//     return _db
-//         .collection('users')
-//         .orderBy('totalPlaces')
-//         .limit(10)
-//         .getDocuments()
-//         .then((querySnapshot) => querySnapshot.documents
-//         .map((element) => User.fromJson(element.data))
-//         .toList())
-//         .whenComplete(() => print('all good'));
-//   }
-//
-//   Future<User> getUserByEmail({String email}) {
-//     return _db
-//         .collection('users')
-//         .document(email)
-//         .get()
-//         .then((value) => User.fromJson(value.data))
-//         .onError((error, stackTrace) {
-//       print(error);
-//       return User(
-//           places: [-1], totalPlaces: -1, picture: 'none', username: 'none');
-//     });
-//   }
-// }
