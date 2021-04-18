@@ -1,6 +1,7 @@
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
+import 'package:conquer_bulgaria_app/model/utilities.dart';
 import 'package:conquer_bulgaria_app/screens/place_info_window/place_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,8 +48,7 @@ class _SearchFieldState extends State<SearchField> {
           controller: _textFieldController,
           suggestions: Provider.of<Data>(context).places,
           itemFilter: (TravelLocation item, query) {
-            return item.name.toLowerCase().contains(query.toLowerCase()) ||
-                item.town.toLowerCase().contains(query.toLowerCase());
+            return itemContainsQuery(item, query);
           },
           itemSorter: (a, b) => a.name.length.compareTo(b.name.length),
           itemSubmitted: (item) {
