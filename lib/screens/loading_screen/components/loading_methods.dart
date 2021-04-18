@@ -121,9 +121,8 @@ class _BodyState extends State<Body> with DisposableWidget {
   }
 
   Timer _calculateTimer;
-  //todo : changeto 15 secs;
   void calculate() async {
-    _calculateTimer = Timer.periodic(Duration(seconds: 3), (Timer t) {
+    _calculateTimer = Timer.periodic(Duration(seconds: 15), (Timer t) {
       print('recalculating distances');
       Provider.of<Data>(context, listen: false).calculateDistancePerTime();
     });

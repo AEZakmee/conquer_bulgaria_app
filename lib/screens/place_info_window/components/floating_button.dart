@@ -38,7 +38,7 @@ class _VisitPlaceButtonState extends State<VisitPlaceButton> {
         //   'places': FieldValue.arrayUnion(
         //       [Provider.of<Data>(context, listen: false).chosenLocation.id])
         // });
-        //in the documentation they say the transaction way is better, but dk
+
         Firestore.instance.runTransaction((transaction) async {
           DocumentSnapshot freshUser = await transaction.get(Firestore.instance
               .collection('users')

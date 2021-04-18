@@ -15,6 +15,13 @@ class Data extends ChangeNotifier {
 
   List<TravelLocation> _places = [];
   List<TravelLocation> get places => _places;
+  List<TravelLocation> get sortedPlaces {
+    if (_places[0].range == null) return _places;
+    var sortedPlaces = _places;
+    sortedPlaces.sort((a, b) => a.range.compareTo(b.range));
+    return sortedPlaces;
+  }
+
   void loadPlaces(List<TravelLocation> places) {
     if (_places.isEmpty || _places == null || _places.length < places.length)
       _places = places;

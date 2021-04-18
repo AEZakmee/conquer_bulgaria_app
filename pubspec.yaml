@@ -36,11 +36,11 @@ dependencies:
   rounded_loading_button: ^1.0.0
   cached_network_image: ^3.0.0
   flutter_blurhash: ^0.6.0
-  flutter_typeahead: ^3.1.1
   location: ^2.3.5
   auto_size_text: ^2.1.0
   url_launcher: ^6.0.3
   rating_bar: ^0.2.0
+  autocomplete_textfield: ^1.7.3
 
 
 dev_dependencies:

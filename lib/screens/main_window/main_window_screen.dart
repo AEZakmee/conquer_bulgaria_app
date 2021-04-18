@@ -70,7 +70,17 @@ class _MainWindowState extends State<MainWindow> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: buildAppBar(context),
-        body: Body(),
+        body: GestureDetector(
+          child: Body(),
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+            //setState(() {});
+            //FocusScope.of(context).requestFocus(new FocusNode());
+          },
+        ),
         bottomNavigationBar: BottomAppBar(
           elevation: 10,
           child: NavBar(),
