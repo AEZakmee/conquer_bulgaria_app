@@ -158,7 +158,7 @@ class TopUser extends StatelessWidget {
       child: Text(
         name,
         style: TextStyle(
-          color: isYou ? Colors.redAccent : Colors.blueGrey,
+          color: isYou ? kPrimaryColor : Colors.blueGrey,
           fontWeight: FontWeight.w800,
           fontSize:
               getProportionateScreenHeight(calculateHeightForPoints(index) - 3),

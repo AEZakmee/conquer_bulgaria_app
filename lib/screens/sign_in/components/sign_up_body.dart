@@ -1,14 +1,12 @@
 import 'dart:async';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
-import 'package:conquer_bulgaria_app/screens/main_window/main_window_screen.dart';
 import 'package:conquer_bulgaria_app/screens/splash/components/buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-
 import '../../../constants.dart';
 import '../../../size_config.dart';
 import '../../../strings.dart';
@@ -25,18 +23,20 @@ class SignUpBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            AutoSizeText(
               sWelcomeToCB,
               textAlign: TextAlign.center,
-              style: headingStyle.copyWith(
-                  fontSize: getProportionateScreenWidth(25)),
+              style: kHeadingStyle.copyWith(
+                  fontSize: getProportionateScreenWidth(35), height: 1),
+              maxLines: 2,
             ),
             SizedBox(height: 5),
-            Text(
+            AutoSizeText(
               sRegisterText,
               textAlign: TextAlign.center,
+              maxLines: 1,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 14),
             SignUpForm(),
           ],
         ),

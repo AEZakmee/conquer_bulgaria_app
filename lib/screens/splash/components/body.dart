@@ -20,29 +20,33 @@ class _BodyState extends State<Body> {
   //todo: get better pictures
   List<Map<String, String>> splashData = [
     {
+      'title': sSplashTextTitle1,
       'text': sSplashText1,
-      'image': 'assets/images/splash_screen1.svg',
+      'image': 'assets/images/splash_screen1.png',
     },
     {
+      'title': sSplashTextTitle2,
       'text': sSplashText2,
-      'image': 'assets/images/splash_screen2.svg',
+      'image': 'assets/images/splash_screen2.png',
     },
     {
+      'title': sSplashTextTitle3,
       'text': sSplashText3,
-      'image': 'assets/images/splash_screen3.svg',
+      'image': 'assets/images/splash_screen3.png',
     }
   ];
+  PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SizedBox(
-        width: double.infinity,
+        width: SizeConfig.screenWidth,
         child: Column(
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  top: getProportionateScreenWidth(20),
-                  bottom: getProportionateScreenWidth(60)),
+                  top: getProportionateScreenWidth(40),
+                  bottom: getProportionateScreenWidth(20)),
               child: Text(
                 sName, // Conquer Bulgaria
                 style: TextStyle(
@@ -56,19 +60,21 @@ class _BodyState extends State<Body> {
               flex: 3,
               child: PageView.builder(
                 itemCount: splashData.length,
+                controller: _pageController,
                 onPageChanged: (index) {
                   setState(() {
                     currentIndex = index;
                   });
                 },
                 itemBuilder: (context, index) => SplashContent(
+                  title: splashData[index]['title'],
                   text: splashData[index]['text'],
                   image: splashData[index]['image'],
                 ),
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Column(
                 children: [
                   Row(
@@ -80,17 +86,29 @@ class _BodyState extends State<Body> {
                   ),
                   Spacer(),
                   Padding(
-                    padding: EdgeInsets.all(getProportionateScreenHeight(30)),
-                    child: DefaultButton(
-                      color: (currentIndex == splashData.length - 1)
-                          ? kPrimaryColor
-                          : Colors.grey,
-                      onPress: () {
-                        if (currentIndex == splashData.length - 1) {
-                          Navigator.pushNamed(context, SignUpScreen.routeName);
-                        }
-                      },
-                      text: sContinue,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Padding(
+                      padding: EdgeInsets.all(getProportionateScreenHeight(30)),
+                      child: DefaultButton(
+                        size: getProportionateScreenWidth(200),
+                        color: (currentIndex == splashData.length - 1)
+                            ? kPrimaryColor
+                            : Colors.grey,
+                        onPress: () {
+                          if (currentIndex == splashData.length - 1) {
+                            Navigator.pushNamed(
+                                context, SignUpScreen.routeName);
+                          } else {
+                            setState(() {
+                              currentIndex++;
+                            });
+                            _pageController.nextPage(
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.decelerate);
+                          }
+                        },
+                        text: sContinue,
+                      ),
                     ),
                   ),
                 ],

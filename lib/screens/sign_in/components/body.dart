@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
 import 'package:conquer_bulgaria_app/screens/main_window/main_window_screen.dart';
 import 'package:conquer_bulgaria_app/screens/splash/components/buttons.dart';
@@ -23,16 +24,17 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            AutoSizeText(
               sWelcomeBack,
-              style: headingStyle,
+              style: kHeadingStyle,
+              maxLines: 1,
             ),
             SizedBox(height: 5),
             Text(
               sSignInText,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 14),
             SignInForm(),
           ],
         ),

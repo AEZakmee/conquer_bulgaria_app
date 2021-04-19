@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'size_config.dart';
 
 //TODO: BETTER COLORS
-const kPrimaryColor = Colors.red;
+const kPrimaryColor = Color(0xffc82a00);
 const kAccentColor = Colors.white;
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Colors.blueGrey;
@@ -11,14 +11,11 @@ const kBoldTextColor = Colors.black;
 const kCoolFont = 'aAlwaysSmile';
 
 const kAnimationDuration = Duration(milliseconds: 200);
-
-final headingStyle = TextStyle(
+final kHeadingStyle = TextStyle(
   fontSize: getProportionateScreenWidth(28),
   fontWeight: FontWeight.bold,
   color: Colors.black,
-  height: 1.5,
 );
-
 final kBoxShadow = BoxShadow(
   offset: Offset(3, 3),
   blurRadius: 5,
