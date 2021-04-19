@@ -9,8 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'utilities.dart';
 
 class Data extends ChangeNotifier {
-  PlaceFilters placeFilters = PlaceFilters();
-
   // Current User from firebase
   User currentUser = User();
   void changeCurrentUser(User user) {
@@ -60,6 +58,7 @@ class Data extends ChangeNotifier {
   }
 
   //This sorts the data that the user requests - filters it
+  PlaceFilters placeFilters = PlaceFilters();
   List<TravelLocation> get sortedPlaces {
     switch (placeFilters.sortType) {
       case sortBy.range:
@@ -69,6 +68,8 @@ class Data extends ChangeNotifier {
         return sortByRating(_places);
       case sortBy.number:
         return _places;
+      case sortBy.numberVotes:
+        return sortByNumberVotes(_places);
       default:
         return _places;
     }

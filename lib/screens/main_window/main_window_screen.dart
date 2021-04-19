@@ -1,16 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:conquer_bulgaria_app/constants.dart';
-import 'package:conquer_bulgaria_app/model/data.dart';
-import 'package:conquer_bulgaria_app/model/travel_location.dart';
-import 'package:conquer_bulgaria_app/model/user_profile.dart';
-import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
 import 'package:conquer_bulgaria_app/screens/others/nav_bar.dart';
 import 'package:conquer_bulgaria_app/screens/splash/splash_screen.dart';
 import 'package:conquer_bulgaria_app/size_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
+import 'package:flutter/services.dart';
 import 'components/app_bar.dart';
 import 'components/body.dart';
 
@@ -46,21 +39,21 @@ class _MainWindowState extends State<MainWindow> {
         return showDialog(
               context: context,
               builder: (context) => new AlertDialog(
-                title: new Text(
-                    'Сигурни ли сте че желаете да излезете от текущата сесия?'),
-                content: new Text(
-                    'Ще се наложи да се валидирате отново следващият път, препоръчително е просто да затворите приложението.'),
+                title:
+                    new Text('Внимание! Напът сте да напуснете приложението!'),
+                content: Text('Сигурни ли сте?'),
                 actions: <Widget>[
                   new GestureDetector(
                     onTap: () => Navigator.of(context).pop(false),
-                    child: Text("Не, нека остана логнат"),
+                    child: Text("Не"),
                   ),
                   SizedBox(height: 16),
                   new GestureDetector(
                     onTap: () {
-                      _auth.signOut();
+                      SystemChannels.platform
+                          .invokeMethod('SystemNavigator.pop');
                     },
-                    child: Text("Да, отпиши ме"),
+                    child: Text("Да"),
                   ),
                 ],
               ),
@@ -77,7 +70,6 @@ class _MainWindowState extends State<MainWindow> {
             if (!currentFocus.hasPrimaryFocus) {
               currentFocus.unfocus();
             }
-            //setState(() {});
             //FocusScope.of(context).requestFocus(new FocusNode());
           },
         ),

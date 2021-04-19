@@ -31,6 +31,21 @@ List<TravelLocation> sortByRating(List<TravelLocation> currentPlaces) {
   return filteredPlaces;
 }
 
+List<TravelLocation> sortByNumberVotes(List<TravelLocation> currentPlaces) {
+  var filteredPlaces = new List<TravelLocation>.from(currentPlaces);
+  filteredPlaces
+      .sort((a, b) => (a.numberRating == null || b.numberRating == null)
+          ? 0
+          : (a.numberRating != b.numberRating)
+              ? a.numberRating > b.numberRating
+                  ? 0
+                  : 1
+              : a.overallRating > b.overallRating
+                  ? 0
+                  : 1);
+  return filteredPlaces;
+}
+
 bool itemContainsQuery(TravelLocation item, String query) {
   return item.name.toLowerCase().contains(query.toLowerCase()) ||
       item.town.toLowerCase().contains(query.toLowerCase());
