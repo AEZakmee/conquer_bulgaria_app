@@ -38,7 +38,7 @@ class SortByContainer extends StatelessWidget {
             child: Text(
               sortByStrings[sortByType],
               style: TextStyle(
-                color: chosenSort == sortByType ? Colors.black : Colors.black87,
+                color: chosenSort == sortByType ? Colors.white : Colors.black54,
                 fontSize: getProportionateScreenWidth(14),
                 fontWeight: FontWeight.w500,
               ),

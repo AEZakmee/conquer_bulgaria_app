@@ -25,7 +25,8 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
-    _picture = 'assets/images/main_window_background${Random().nextInt(9)}.jpg';
+    _picture =
+        'assets/images/main_window_background${Random().nextInt(13)}.jpg';
   }
 
   @override

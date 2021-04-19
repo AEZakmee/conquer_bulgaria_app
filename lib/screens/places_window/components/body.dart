@@ -20,17 +20,18 @@ class _BodyState extends State<Body> {
         children: [
           Container(
             width: SizeConfig.screenWidth,
-            color: Colors.grey.shade300,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      top: getProportionateScreenHeight(4), left: 12),
+                    top: getProportionateScreenHeight(4),
+                    left: 12,
+                  ),
                   child: Text(
                     'Сортирай по',
                     style: TextStyle(
-                      fontSize: getProportionateScreenWidth(14),
+                      fontSize: getProportionateScreenHeight(12.5),
                       color: kBoldTextColor,
                       fontWeight: FontWeight.w600,
                     ),
@@ -50,6 +51,9 @@ class _BodyState extends State<Body> {
                           chosenSort:
                               Provider.of<Data>(context).placeFilters.sortType,
                         ),
+                      ),
+                      SizedBox(
+                        width: getProportionateScreenWidth(12),
                       ),
                     ],
                   ),

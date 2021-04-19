@@ -2,10 +2,12 @@ import 'package:conquer_bulgaria_app/screens/others/nav_bar.dart';
 import 'package:conquer_bulgaria_app/screens/splash/splash_screen.dart';
 import 'package:conquer_bulgaria_app/size_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'components/app_bar.dart';
+
 import 'components/body.dart';
+import 'components/drawer.dart';
 
 class MainWindow extends StatefulWidget {
   static String routeName = '/main_window';
@@ -16,6 +18,7 @@ class MainWindow extends StatefulWidget {
 
 class _MainWindowState extends State<MainWindow> {
   var _auth = FirebaseAuth.instance;
+  var _userMail = '';
   @override
   void initState() {
     // TODO: implement initState
@@ -26,7 +29,10 @@ class _MainWindowState extends State<MainWindow> {
         Navigator.of(context).pushNamedAndRemoveUntil(
             SplashScreen.routeName, (Route<dynamic> route) => false);
       } else {
-        print('User' + user.email + 'is signed in');
+        setState(() {
+          _userMail = user.email;
+        });
+        print('User ' + user.email + ' just signed in');
       }
     });
   }
@@ -62,13 +68,25 @@ class _MainWindowState extends State<MainWindow> {
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: buildAppBar(context),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(
+                Icons.menu,
+                size: getProportionateScreenHeight(40),
+              ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
+        ),
+        drawer: CustomDrawer(userMail: _userMail),
         body: GestureDetector(
           child: Body(),
           onTap: () {
-            FocusScopeNode currentFocus = FocusScope.of(context);
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
+            final FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus && currentFocus.hasFocus) {
+              FocusManager.instance.primaryFocus.unfocus();
             }
             //FocusScope.of(context).requestFocus(new FocusNode());
           },

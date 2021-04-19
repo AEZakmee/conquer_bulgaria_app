@@ -11,31 +11,35 @@ class PlacesInfoWindow extends StatelessWidget {
   static String routeName = '/places_info';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: getProportionateScreenHeight(50),
+    return Theme(
+      data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: getProportionateScreenHeight(50),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
+        floatingActionButton: (!Provider.of<Data>(context)
+                    .currentUser
+                    .places
+                    .contains(Provider.of<Data>(context).chosenLocation.id) &&
+                Provider.of<Data>(context).chosenLocation.range != null)
+            ? VisitPlaceButton(
+                userIsInPlace:
+                    Provider.of<Data>(context).chosenLocation.range < 0.1 ??
+                        1000)
+            : null,
+        body: Body(),
       ),
-      floatingActionButton: (!Provider.of<Data>(context)
-                  .currentUser
-                  .places
-                  .contains(Provider.of<Data>(context).chosenLocation.id) &&
-              Provider.of<Data>(context).chosenLocation.range != null)
-          ? VisitPlaceButton(
-              userIsInPlace:
-                  Provider.of<Data>(context).chosenLocation.range < 0.1 ?? 1000)
-          : null,
-      body: Body(),
     );
   }
 }

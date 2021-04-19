@@ -9,6 +9,7 @@ class PlacesWindow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
+      backgroundColor: Colors.grey.shade200,
       body: Body(),
     );
   }

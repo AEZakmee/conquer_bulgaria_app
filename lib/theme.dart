@@ -9,7 +9,7 @@ ThemeData theme() {
     brightness: Brightness.light,
     primarySwatch: Colors.grey,
     primaryColor: kPrimaryColor,
-    canvasColor: Colors.transparent,
+    //canvasColor: Colors.transparent,
     primaryColorBrightness: Brightness.light,
     accentColor: kAccentColor,
     accentColorBrightness: Brightness.light,
