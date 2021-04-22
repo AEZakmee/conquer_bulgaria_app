@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:conquer_bulgaria_app/model/data.dart';
+import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:conquer_bulgaria_app/model/user_location.dart';
 import 'package:conquer_bulgaria_app/screens/main_window/components/top_users.dart';
 import 'package:conquer_bulgaria_app/screens/places_window/places_window_screen.dart';
@@ -22,6 +23,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   String _picture;
+  List<TravelLocation> places;
   @override
   void initState() {
     super.initState();
@@ -31,6 +33,7 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    places = Provider.of<Data>(context).getMainScreenPlaces;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -47,33 +50,36 @@ class _BodyState extends State<Body> {
           SizedBox(
             height: getProportionateScreenHeight(55),
           ),
-          TitleSeeAll(
-            text: sPlacesMainScreen,
-            onClick: () {
-              Navigator.pushNamed(context, PlacesWindow.routeName);
-            },
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ...List.generate(
-                  Provider.of<Data>(context).places.length != 0 ? 4 : 0,
-                  (index) => Padding(
-                    padding: EdgeInsets.only(
-                      left: getProportionateScreenWidth(12),
-                    ),
-                    child: PlacesCard(
-                      travelLocation: Provider.of<Data>(context).places[index],
+          if (places != null && places.isNotEmpty)
+            TitleSeeAll(
+              text: sPlacesMainScreen,
+              onClick: () {
+                Navigator.pushNamed(context, PlacesWindow.routeName);
+              },
+            ),
+          if (places != null && places.isNotEmpty)
+            SizedBox(
+              height: getProportionateScreenHeight(20),
+            ),
+          if (places != null && places.isNotEmpty)
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...List.generate(
+                    places.length,
+                    (index) => Padding(
+                      padding: EdgeInsets.only(
+                        left: getProportionateScreenWidth(12),
+                      ),
+                      child: PlacesCard(
+                        travelLocation: places[index],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
           SizedBox(
             height: getProportionateScreenHeight(40),
           ),
