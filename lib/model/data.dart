@@ -10,6 +10,12 @@ import 'utilities.dart';
 
 class Data extends ChangeNotifier {
   // Current User from firebase
+  String userMail = '';
+  void loadUserEmail(String email) {
+    userMail = email;
+    notifyListeners();
+  }
+
   User currentUser = User();
   void changeCurrentUser(User user) {
     currentUser = user;

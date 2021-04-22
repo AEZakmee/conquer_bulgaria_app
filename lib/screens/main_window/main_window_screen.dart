@@ -1,3 +1,4 @@
+import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/screens/others/nav_bar.dart';
 import 'package:conquer_bulgaria_app/screens/splash/splash_screen.dart';
 import 'package:conquer_bulgaria_app/size_config.dart';
@@ -5,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import 'components/body.dart';
 import 'components/drawer.dart';
@@ -18,7 +20,6 @@ class MainWindow extends StatefulWidget {
 
 class _MainWindowState extends State<MainWindow> {
   var _auth = FirebaseAuth.instance;
-  var _userMail = '';
   @override
   void initState() {
     // TODO: implement initState
@@ -29,9 +30,7 @@ class _MainWindowState extends State<MainWindow> {
         Navigator.of(context).pushNamedAndRemoveUntil(
             SplashScreen.routeName, (Route<dynamic> route) => false);
       } else {
-        setState(() {
-          _userMail = user.email;
-        });
+        Provider.of<Data>(context, listen: false).loadUserEmail(user.email);
         print('User ' + user.email + ' just signed in');
       }
     });
@@ -80,7 +79,7 @@ class _MainWindowState extends State<MainWindow> {
             ),
           ),
         ),
-        drawer: CustomDrawer(userMail: _userMail),
+        drawer: CustomDrawer(userMail: Provider.of<Data>(context).userMail),
         body: GestureDetector(
           child: Body(),
           onTap: () {

@@ -38,11 +38,6 @@ class NavBar extends StatelessWidget {
                 Navigator.pushNamed(context, LeaderBoardWindow.routeName);
               },
             ),
-            NavItem(
-              icon: Icons.add_to_queue,
-              title: 'НЕЩОО?',
-              press: () {},
-            ),
           ],
         ),
       ),

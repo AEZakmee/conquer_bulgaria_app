@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conquer_bulgaria_app/model/data.dart';
 import 'package:conquer_bulgaria_app/model/travel_location.dart';
+import 'package:conquer_bulgaria_app/screens/user_profile/user_profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,9 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Моят профил'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, UserProfile.routeName);
+            },
           ),
           Divider(),
           ListTile(
