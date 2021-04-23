@@ -51,6 +51,7 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.account_circle),
             title: Text('Моят профил'),
             onTap: () {
+              Provider.of<Data>(context, listen: false).setChosenUserSelf();
               Navigator.pushNamed(context, UserProfile.routeName);
             },
           ),

@@ -6,6 +6,7 @@ import 'package:conquer_bulgaria_app/model/user_location.dart';
 import 'package:conquer_bulgaria_app/model/user_profile.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'chosenUser.dart';
 import 'utilities.dart';
 
 class Data extends ChangeNotifier {
@@ -94,6 +95,26 @@ class Data extends ChangeNotifier {
   TravelLocation get chosenLocation => _chosenLocation;
   void setChosenLocation(TravelLocation place) {
     _chosenLocation = place;
+    notifyListeners();
+  }
+
+  //Methods that sets the chosenUser for the User Profile Screen
+  ChosenUser _chosenUser;
+  ChosenUser get chosenUser => _chosenUser;
+  void setChosenUser(int position) {
+    User user = _topUsers[position];
+    _chosenUser = ChosenUser(userData: user, position: position + 1);
+    notifyListeners();
+  }
+
+  void setChosenUserSelf() {
+    int position = 100;
+    for (int i = 0; i < topUsersLength; i++) {
+      if (_topUsers[i].username == currentUser.username) {
+        position = i + 1;
+      }
+    }
+    _chosenUser = ChosenUser(userData: currentUser, position: position);
     notifyListeners();
   }
 }
