@@ -20,6 +20,9 @@ class Data extends ChangeNotifier {
   User currentUser = User();
   void changeCurrentUser(User user) {
     currentUser = user;
+    if (_chosenUser.userData.uniqueID == user.uniqueID) {
+      _chosenUser.userData = user;
+    }
     notifyListeners();
   }
 
@@ -45,6 +48,11 @@ class Data extends ChangeNotifier {
   int get topUsersLength => _topUsers.length ?? 0;
   void changeTopUsers(List<User> users) {
     _topUsers = users;
+    users.forEach((user) {
+      if (_chosenUser.userData.uniqueID == user.uniqueID) {
+        _chosenUser.userData = user;
+      }
+    });
     notifyListeners();
   }
 
@@ -110,11 +118,12 @@ class Data extends ChangeNotifier {
   void setChosenUserSelf() {
     int position = 100;
     for (int i = 0; i < topUsersLength; i++) {
-      if (_topUsers[i].username == currentUser.username) {
+      if (_topUsers[i].uniqueID == currentUser.uniqueID) {
         position = i + 1;
       }
     }
-    _chosenUser = ChosenUser(userData: currentUser, position: position);
+    _chosenUser = ChosenUser(
+        userData: currentUser, position: position, isCurrentUser: true);
     notifyListeners();
   }
 }

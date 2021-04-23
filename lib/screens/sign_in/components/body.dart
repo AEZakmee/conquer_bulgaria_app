@@ -56,6 +56,22 @@ class _SignInFormState extends State<SignInForm> {
   String get _pass => _passwordController.text.trim();
   final _btnController = new RoundedLoadingButtonController();
   String error;
+
+  _callError(String errorMessage) {
+    if (mounted) {
+      _btnController.error();
+      setState(() {
+        error = errorMessage.toString();
+      });
+      Timer(Duration(seconds: 1), () {
+        if (mounted) {
+          _btnController.reset();
+        }
+      });
+      print(errorMessage);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -104,23 +120,10 @@ class _SignInFormState extends State<SignInForm> {
                 }
               } catch (e) {
                 //todo: catch all exceptions
-                _btnController.error();
-                setState(() {
-                  error = e.toString();
-                });
-                Timer(Duration(seconds: 1), () {
-                  _btnController.reset();
-                });
-                print(e);
+                _callError(e);
               }
             } else {
-              _btnController.error();
-              setState(() {
-                error = 'Моля напишете емейл/парола';
-              });
-              Timer(Duration(seconds: 1), () {
-                _btnController.reset();
-              });
+              _callError('Моля напишете емейл/парола');
             }
           },
         ),

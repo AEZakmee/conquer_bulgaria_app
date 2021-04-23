@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User {
+  String uniqueID;
   String username;
   String picture;
   int totalPlaces;
@@ -8,7 +9,8 @@ class User {
   List<int> votedPlaces;
 
   User(
-      {this.username,
+      {this.uniqueID,
+      this.username,
       this.places,
       this.picture,
       this.totalPlaces,
@@ -16,6 +18,7 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
+        uniqueID: json['uniqueID'],
         username: json['username'],
         picture: json['picture'],
         totalPlaces: json['totalPlaces'],
@@ -25,6 +28,7 @@ class User {
 
   Map<String, dynamic> toMap() {
     return {
+      'uniqueID': uniqueID,
       'username': username,
       'picture': picture,
       'totalPlaces': totalPlaces,

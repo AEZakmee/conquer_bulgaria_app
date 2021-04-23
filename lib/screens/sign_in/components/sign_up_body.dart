@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conquer_bulgaria_app/screens/loading_screen/loading_window.dart';
@@ -64,6 +65,21 @@ class _SignUpFormState extends State<SignUpForm> {
   String get _firstName => _firstNameController.text.trim();
   String get _secondName => _secondNameController.text.trim();
   String error;
+
+  _callError(String errorMessage) {
+    if (mounted) {
+      _btnController.error();
+      setState(() {
+        error = errorMessage.toString();
+      });
+      Timer(Duration(seconds: 1), () {
+        if (mounted) {
+          _btnController.reset();
+        }
+      });
+      print(errorMessage);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,10 +155,12 @@ class _SignUpFormState extends State<SignUpForm> {
                           .collection('users')
                           .document(_email.toLowerCase())
                           .setData({
+                        'uniqueID': Timestamp.now().seconds.toString() +
+                            Random().nextInt(9).toString(),
                         'username':
-                            '${_firstName[0].toUpperCase()}${_firstName.substring(1)}' +
+                            '${_firstName[0].toUpperCase()}${_firstName.substring(1).toLowerCase()}' +
                                 ' ' +
-                                '${_secondName[0].toUpperCase()}${_secondName.substring(1)}',
+                                '${_secondName[0].toUpperCase()}${_secondName.substring(1).toLowerCase()}',
                         'picture': 'none',
                         'totalPlaces': 0,
                         'places': [],
@@ -155,32 +173,13 @@ class _SignUpFormState extends State<SignUpForm> {
                     }
                   } catch (e) {
                     //TODO: catch all exceptions
-                    _btnController.error();
-                    setState(() {
-                      error = e.toString();
-                    });
-                    Timer(Duration(seconds: 1), () {
-                      _btnController.reset();
-                    });
-                    print(e);
+                    _callError(e);
                   }
                 } else {
-                  _btnController.error();
-                  setState(() {
-                    error = 'Моля въведете валидни имена';
-                  });
-                  Timer(Duration(seconds: 1), () {
-                    _btnController.reset();
-                  });
+                  _callError('Моля въведете валидни имена');
                 }
               } else {
-                _btnController.error();
-                setState(() {
-                  error = 'Моля въведете цялата необходима информация';
-                });
-                Timer(Duration(seconds: 1), () {
-                  _btnController.reset();
-                });
+                _callError('Моля въведете цялата необходима информация');
               }
             }),
         SizedBox(height: getProportionateScreenHeight(20)),

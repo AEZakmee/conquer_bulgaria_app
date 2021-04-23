@@ -9,6 +9,7 @@ const kTextColor = Colors.blueGrey;
 const kBoxColor = Color(0xFF3E4067);
 const kBoldTextColor = Colors.black;
 const kCoolFont = 'aAlwaysSmile';
+const kBlueGreenColor = Color(0xff009cad);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 final kHeadingStyle = TextStyle(

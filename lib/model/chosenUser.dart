@@ -4,7 +4,8 @@ class ChosenUser {
   List<String> badges;
   User userData;
   int position;
-  ChosenUser({this.userData, this.position}) {
+  bool isCurrentUser;
+  ChosenUser({this.userData, this.position, this.isCurrentUser = false}) {
     badges = _loadBadges(this.userData);
   }
 

@@ -7,6 +7,7 @@ ThemeData theme() {
     appBarTheme: appBarTheme(),
     textTheme: textTheme(),
     brightness: Brightness.light,
+    //fontFamily: 'Heathergreen',
     primarySwatch: Colors.grey,
     primaryColor: kPrimaryColor,
     //canvasColor: Colors.transparent,
