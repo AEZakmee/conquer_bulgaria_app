@@ -23,7 +23,9 @@ class TopUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Provider.of<Data>(context, listen: false).setChosenUser(index);
+        isCurrentUser
+            ? Provider.of<Data>(context, listen: false).setChosenUserSelf()
+            : Provider.of<Data>(context, listen: false).setChosenUser(index);
         Navigator.pushNamed(context, UserProfile.routeName);
       },
       child: Container(

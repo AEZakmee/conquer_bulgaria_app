@@ -60,9 +60,6 @@ class VisitedPlaceColumn extends StatelessWidget {
                 )
               ],
             ),
-            Divider(
-              color: kBlueGreenColor,
-            ),
           ],
         ),
       ),

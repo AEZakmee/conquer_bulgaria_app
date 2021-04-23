@@ -36,6 +36,19 @@ class _BodyState extends State<Body> {
             VisitedPlaceColumn(
               chosenUser: Provider.of<Data>(context).chosenUser,
             ),
+          if (Provider.of<Data>(context).chosenUser.badges.isEmpty &&
+              Provider.of<Data>(context).chosenUser.userData.places.isEmpty)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Няма данни',
+                  style: TextStyle(
+                    fontSize: getProportionateScreenHeight(20),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
