@@ -13,9 +13,35 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  int loaded = 10;
+  ScrollController _controller;
+  _scrollListener() {
+    if (_controller.offset >= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange) {
+      setState(() {
+        loaded += 10;
+        print(loaded);
+      });
+    }
+    if (_controller.offset <= _controller.position.minScrollExtent &&
+        !_controller.position.outOfRange) {
+      setState(() {
+        loaded = 10;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    _controller = ScrollController();
+    _controller.addListener(_scrollListener);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: _controller,
       child: Column(
         children: [
           Container(
@@ -71,7 +97,9 @@ class _BodyState extends State<Body> {
                 width: double.infinity,
               ),
               ...List.generate(
-                Provider.of<Data>(context).placesLength,
+                loaded > Provider.of<Data>(context).placesLength
+                    ? Provider.of<Data>(context).placesLength
+                    : loaded,
                 (index) => BigPlacesCard(
                   travelLocation:
                       Provider.of<Data>(context).sortedPlaces[index],

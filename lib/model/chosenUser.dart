@@ -7,15 +7,10 @@ class ChosenUser {
   bool isCurrentUser;
   ChosenUser({this.userData, this.position, this.isCurrentUser = false}) {
     badges = _loadBadges(this.userData);
-    _filterPlaces();
   }
 
-  void _filterPlaces() {
-    for (int i = 0; i < userData.places.length; i++) {
-      if (userData.places[i] < 1 || userData.places[i] > 200) {
-        userData.places.removeAt(i);
-      }
-    }
+  void updateUserData(User user) {
+    userData = user;
   }
 
   var _positions = [5, 10, 20, 50, 100];

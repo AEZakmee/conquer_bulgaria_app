@@ -17,13 +17,17 @@ class User {
       this.votedPlaces});
 
   factory User.fromJson(Map<String, dynamic> json) {
+    List<int> placesFilter = List.from(json['places']);
+    placesFilter.removeWhere((element) => element < 1001);
+    List<int> votedFilter = List.from(json['votedPlaces']);
+    votedFilter.removeWhere((element) => element < 1001);
     return User(
         uniqueID: json['uniqueID'],
         username: json['username'],
         picture: json['picture'],
         totalPlaces: json['totalPlaces'],
-        places: List.from(json['places']),
-        votedPlaces: List.from(json['votedPlaces']));
+        places: placesFilter,
+        votedPlaces: votedFilter);
   }
 
   Map<String, dynamic> toMap() {

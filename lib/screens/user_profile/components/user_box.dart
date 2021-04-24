@@ -50,7 +50,7 @@ class UserInfoBox extends StatelessWidget {
               ),
             ),
             Text(
-              'Оценени обекти: ${chosenUser.userData.votedPlaces.length - 1}',
+              'Оценени обекти: ${chosenUser.userData.votedPlaces.length}',
               style: TextStyle(
                 color: kBlueGreenColor,
                 fontWeight: FontWeight.bold,

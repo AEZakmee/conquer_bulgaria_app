@@ -19,7 +19,7 @@ enum sortBy {
 }
 
 Map<sortBy, String> sortByStrings = {
-  sortBy.number: 'Номер на обекта',
+  sortBy.number: 'Населено място',
   sortBy.rating: 'Рейтинг',
   sortBy.range: 'Растояние',
   sortBy.numberVotes: 'Брой гласове',

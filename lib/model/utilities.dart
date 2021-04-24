@@ -18,31 +18,24 @@ List<TravelLocation> sortByRange(List<TravelLocation> currentPlaces) {
 
 List<TravelLocation> sortByRating(List<TravelLocation> currentPlaces) {
   var filteredPlaces = new List<TravelLocation>.from(currentPlaces);
-  filteredPlaces
-      .sort((a, b) => (a.overallRating == null || b.overallRating == null)
-          ? 0
-          : (a.overallRating != b.overallRating)
-              ? a.overallRating > b.overallRating
-                  ? 0
-                  : 1
-              : a.numberRating > b.numberRating
-                  ? 0
-                  : 1);
+  filteredPlaces.sort((a, b) {
+    if (a.overallRating == b.overallRating)
+      return b.numberRating.compareTo(a.numberRating);
+    else
+      return b.overallRating.compareTo(a.overallRating);
+  });
+  //print(filteredPlaces.map((e) => e.overallRating).join(' '));
   return filteredPlaces;
 }
 
 List<TravelLocation> sortByNumberVotes(List<TravelLocation> currentPlaces) {
   var filteredPlaces = new List<TravelLocation>.from(currentPlaces);
-  filteredPlaces
-      .sort((a, b) => (a.numberRating == null || b.numberRating == null)
-          ? 0
-          : (a.numberRating != b.numberRating)
-              ? a.numberRating > b.numberRating
-                  ? 0
-                  : 1
-              : a.overallRating > b.overallRating
-                  ? 0
-                  : 1);
+  filteredPlaces.sort((a, b) {
+    if (a.numberRating == b.numberRating)
+      return b.overallRating.compareTo(a.overallRating);
+    else
+      return b.numberRating.compareTo(a.numberRating);
+  });
   return filteredPlaces;
 }
 

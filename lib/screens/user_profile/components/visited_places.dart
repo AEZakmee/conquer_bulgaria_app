@@ -18,50 +18,54 @@ class VisitedPlaceColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        width: SizeConfig.screenWidth,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                left: getProportionateScreenHeight(15),
-                top: getProportionateScreenWidth(10),
-              ),
-              child: Text(
-                'Посетени обекти',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: getProportionateScreenHeight(19),
-                  color: kBlueGreenColor,
-                ),
+    return Container(
+      width: SizeConfig.screenWidth,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              left: getProportionateScreenHeight(15),
+              top: getProportionateScreenWidth(10),
+            ),
+            child: Text(
+              chosenUser.isCurrentUser
+                  ? 'Разгледани обекти'
+                  : 'Последно разгледани обекти',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: getProportionateScreenHeight(19),
+                color: kBlueGreenColor,
               ),
             ),
-            Wrap(
-              alignment: WrapAlignment.spaceAround,
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                ),
-                ...List.generate(
-                  chosenUser.userData.places.length,
-                  (index) => Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: getProportionateScreenHeight(12),
-                      horizontal: getProportionateScreenWidth(5),
-                    ),
-                    child: PlaceCard(
-                      chosenUser: chosenUser,
-                      travelLocation: Provider.of<Data>(context)
-                          .places[chosenUser.userData.places[index] - 1],
-                    ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.spaceAround,
+            children: [
+              SizedBox(
+                width: double.infinity,
+              ),
+              ...List.generate(
+                chosenUser.isCurrentUser
+                    ? chosenUser.userData.places.length
+                    : chosenUser.userData.places.length < 9
+                        ? chosenUser.userData.places.length
+                        : 9,
+                (index) => Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: getProportionateScreenHeight(12),
+                    horizontal: getProportionateScreenWidth(5),
                   ),
-                )
-              ],
-            ),
-          ],
-        ),
+                  child: PlaceCard(
+                    chosenUser: chosenUser,
+                    travelLocation: Provider.of<Data>(context)
+                        .places[chosenUser.userData.places[index] - 1001],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

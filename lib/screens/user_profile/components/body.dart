@@ -21,35 +21,41 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: SizeConfig.screenWidth,
-      color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          UserInfoBox(chosenUser: Provider.of<Data>(context).chosenUser),
-          if (Provider.of<Data>(context).chosenUser.badges.isNotEmpty)
-            UserBadges(
-              chosenUser: Provider.of<Data>(context).chosenUser,
-            ),
-          if (Provider.of<Data>(context).chosenUser.userData.places.isNotEmpty)
-            VisitedPlaceColumn(
-              chosenUser: Provider.of<Data>(context).chosenUser,
-            ),
-          if (Provider.of<Data>(context).chosenUser.badges.isEmpty &&
-              Provider.of<Data>(context).chosenUser.userData.places.isEmpty)
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Няма данни',
-                  style: TextStyle(
-                    fontSize: getProportionateScreenHeight(20),
+    return SingleChildScrollView(
+      child: Container(
+        width: SizeConfig.screenWidth,
+        color: Colors.white,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            UserInfoBox(chosenUser: Provider.of<Data>(context).chosenUser),
+            if (Provider.of<Data>(context).chosenUser.badges.isNotEmpty)
+              UserBadges(
+                chosenUser: Provider.of<Data>(context).chosenUser,
+              ),
+            if (Provider.of<Data>(context)
+                .chosenUser
+                .userData
+                .places
+                .isNotEmpty)
+              VisitedPlaceColumn(
+                chosenUser: Provider.of<Data>(context).chosenUser,
+              ),
+            if (Provider.of<Data>(context).chosenUser.badges.isEmpty &&
+                Provider.of<Data>(context).chosenUser.userData.places.isEmpty)
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'Няма данни',
+                    style: TextStyle(
+                      fontSize: getProportionateScreenHeight(20),
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
