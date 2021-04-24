@@ -120,7 +120,16 @@ class _SignInFormState extends State<SignInForm> {
                 }
               } catch (e) {
                 //todo: catch all exceptions
-                _callError(e);
+                //ERROR_INVALID_EMAIL
+                //ERROR_USER_NOT_FOUND
+                if (e.toString().contains('ERROR_USER_NOT_FOUND')) {
+                  _callError('Грешно потребителско име или парола');
+                } else if (e.toString().contains('ERROR_INVALID_EMAIL')) {
+                  _callError('Въведеният Имейл адрес е невалиден!');
+                } else {
+                  _callError(
+                      'Грешка при валидация. Моля проверете всички данни');
+                }
               }
             } else {
               _callError('Моля напишете емейл/парола');
