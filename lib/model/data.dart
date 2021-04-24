@@ -135,10 +135,3 @@ class Data extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-//     // PlacesData().placesForUpload.forEach((element) {
-//     //   Firestore.instance
-//     //       .collection('places')
-//     //       .document(element.id.toString())
-//     //       .setData(element.toMap());
-//     // });

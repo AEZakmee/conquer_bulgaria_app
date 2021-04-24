@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conquer_bulgaria_app/constants.dart';
+import 'package:conquer_bulgaria_app/model/travel_location.dart';
 import 'package:conquer_bulgaria_app/screens/leaderboard/leaderboard_screen.dart';
 import 'package:conquer_bulgaria_app/screens/places_window/places_window_screen.dart';
 import 'package:conquer_bulgaria_app/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../constants.dart';
 import '../../size_config.dart';
@@ -38,6 +43,26 @@ class NavBar extends StatelessWidget {
                 Navigator.pushNamed(context, LeaderBoardWindow.routeName);
               },
             ),
+            // NavItem(
+            //   icon: Icons.local_activity,
+            //   title: 'load',
+            //   press: () async {
+            //     final String response =
+            //         await rootBundle.loadString('assets/places.json');
+            //     final data = await json.decode(response);
+            //     List<TravelLocation> locs = [];
+            //     print(data['places'].forEach((v) {
+            //       locs.add(TravelLocation.fromJson(v));
+            //     }));
+            //     for (int i = 0; i < locs.length; i++) {
+            //       //await Future.delayed(Duration(seconds: 3));
+            //       Firestore.instance
+            //           .collection('places')
+            //           .document(locs[i].id.toString())
+            //           .setData(locs[i].toMap());
+            //     }
+            //   },
+            // ),
           ],
         ),
       ),
