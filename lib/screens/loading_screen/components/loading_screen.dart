@@ -27,9 +27,11 @@ class LoadingScreenWidget extends StatelessWidget {
             SizedBox(
               height: getProportionateScreenHeight(20),
             ),
-            SizedBox(
-              width: getProportionateScreenWidth(150),
-              child: Image.asset('assets/images/loading_flag.png'),
+            Flexible(
+              child: SizedBox(
+                width: getProportionateScreenWidth(150),
+                child: Image.asset('assets/images/loading_flag.png'),
+              ),
             ),
             SizedBox(
               height: getProportionateScreenHeight(20),

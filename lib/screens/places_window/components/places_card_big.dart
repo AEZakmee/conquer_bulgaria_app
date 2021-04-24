@@ -40,16 +40,13 @@ class BigPlacesCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Hero(
-                tag: travelLocation.id,
-                child: SizedBox(
-                  height: getProportionateScreenHeight(150),
-                  child: CustomCachedImage(
-                    travelLocation: travelLocation,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
+              SizedBox(
+                height: getProportionateScreenHeight(150),
+                child: CustomCachedImage(
+                  travelLocation: travelLocation,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                 ),
               ),

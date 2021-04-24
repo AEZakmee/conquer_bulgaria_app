@@ -28,17 +28,14 @@ class PlacesCard extends StatelessWidget {
         width: getProportionateScreenWidth(130),
         child: Column(
           children: [
-            Hero(
-              tag: travelLocation.id,
-              child: AspectRatio(
-                aspectRatio: 16 / 10,
-                child: CustomCachedImage(
-                  travelLocation: travelLocation,
-                  hasShadow: true,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
+            AspectRatio(
+              aspectRatio: 16 / 10,
+              child: CustomCachedImage(
+                travelLocation: travelLocation,
+                hasShadow: true,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
               ),
             ),

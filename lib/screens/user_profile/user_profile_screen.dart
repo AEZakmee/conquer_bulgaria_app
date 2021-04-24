@@ -12,7 +12,7 @@ class UserProfile extends StatelessWidget {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          'Моят Профил',
+          'Профил',
           style: TextStyle(
             color: kPrimaryColor,
             fontSize: getProportionateScreenWidth(20),

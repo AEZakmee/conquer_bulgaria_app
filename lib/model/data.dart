@@ -62,7 +62,7 @@ class Data extends ChangeNotifier {
   //Getting places data from firebase
   List<TravelLocation> _places = [];
   List<TravelLocation> get getMainScreenPlaces =>
-      mainScreenPlaces(_places, currentUser.places);
+      mainScreenPlaces(_places, currentUser.places ?? []);
   List<TravelLocation> get places => _places;
   int get placesLength => _places.length ?? 0;
   void loadPlaces(List<TravelLocation> places) {

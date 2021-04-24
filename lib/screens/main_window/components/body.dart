@@ -57,10 +57,10 @@ class _BodyState extends State<Body> {
                 Navigator.pushNamed(context, PlacesWindow.routeName);
               },
             ),
-          if (places != null && places.isNotEmpty)
-            SizedBox(
-              height: getProportionateScreenHeight(20),
-            ),
+          SizedBox(
+            height: getProportionateScreenHeight(
+                (places == null || places.isEmpty) ? 220 : 20),
+          ),
           if (places != null && places.isNotEmpty)
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -83,33 +83,34 @@ class _BodyState extends State<Body> {
           SizedBox(
             height: getProportionateScreenHeight(40),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.blueGrey.shade100,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50),
-                topRight: Radius.circular(50),
+          if (Provider.of<Data>(context).topUsers.isNotEmpty)
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.shade100,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: getProportionateScreenHeight(10),
-                ),
-                TitleSeeAll(
-                  text: sTopUsers,
-                  hasSeeAllButton: false,
-                ),
-                SizedBox(
-                  height: getProportionateScreenHeight(10),
-                ),
-                UsersRow(),
-                SizedBox(
-                  height: getProportionateScreenHeight(20),
-                ),
-              ],
-            ),
-          )
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: getProportionateScreenHeight(10),
+                  ),
+                  TitleSeeAll(
+                    text: sTopUsers,
+                    hasSeeAllButton: false,
+                  ),
+                  SizedBox(
+                    height: getProportionateScreenHeight(10),
+                  ),
+                  UsersRow(),
+                  SizedBox(
+                    height: getProportionateScreenHeight(20),
+                  ),
+                ],
+              ),
+            )
         ],
       ),
     );

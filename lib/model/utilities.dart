@@ -41,6 +41,7 @@ List<TravelLocation> sortByNumberVotes(List<TravelLocation> currentPlaces) {
 
 List<TravelLocation> mainScreenPlaces(
     List<TravelLocation> currentPlaces, List<int> userPlaces) {
+  if (currentPlaces.isEmpty) return [];
   var filteredPlaces = new List<TravelLocation>.from(currentPlaces);
   if (currentPlaces[0].range != null) {
     filteredPlaces.sort((a, b) => a.range.compareTo(b.range));

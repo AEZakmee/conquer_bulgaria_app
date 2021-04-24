@@ -76,7 +76,7 @@ class _BodyState extends State<Body> with DisposableWidget {
               .toList());
         }).canceledBy(this);
 
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(Duration(milliseconds: 750));
         //Starts the User location stream
         getLocation();
         //Proceeds to the next screen
