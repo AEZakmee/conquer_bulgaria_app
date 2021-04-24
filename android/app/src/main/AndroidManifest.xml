@@ -2,7 +2,7 @@
     package="kris.uniproject.conquer_bulgaria_app">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
-        android:label="conquer_bulgaria_app"
+        android:label="Опознай България"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

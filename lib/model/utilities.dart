@@ -41,25 +41,29 @@ List<TravelLocation> sortByNumberVotes(List<TravelLocation> currentPlaces) {
 
 List<TravelLocation> mainScreenPlaces(
     List<TravelLocation> currentPlaces, List<int> userPlaces) {
+  var filteredPlaces = new List<TravelLocation>.from(currentPlaces);
+  if (currentPlaces[0].range != null) {
+    filteredPlaces.sort((a, b) => a.range.compareTo(b.range));
+  }
   List<TravelLocation> newPlaces = [];
   int count = 0;
-  for (int i = 0; i < currentPlaces.length; i++) {
-    if (!userPlaces.contains(currentPlaces[i].id)) {
-      newPlaces.add(currentPlaces[i]);
+  for (int i = 0; i < filteredPlaces.length; i++) {
+    if (!userPlaces.contains(filteredPlaces[i].id)) {
+      newPlaces.add(filteredPlaces[i]);
       count++;
       if (count == 5) break;
     }
   }
   if (newPlaces.isEmpty) {
-    int range = currentPlaces.length < 7 ? currentPlaces.length : 5;
+    int range = filteredPlaces.length < 7 ? filteredPlaces.length : 5;
     for (int i = 0; i < range; i++) {
-      newPlaces.add(currentPlaces[i]);
+      newPlaces.add(filteredPlaces[i]);
     }
   }
   return newPlaces;
 }
 
 bool itemContainsQuery(TravelLocation item, String query) {
-  return item.name.toLowerCase().contains(query.toLowerCase()) ||
-      item.town.toLowerCase().contains(query.toLowerCase());
+  return item.name.toLowerCase().contains(query.toLowerCase().trim()) ||
+      item.town.toLowerCase().contains(query.toLowerCase().trim());
 }
